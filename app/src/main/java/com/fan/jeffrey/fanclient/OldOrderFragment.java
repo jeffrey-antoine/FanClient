@@ -11,14 +11,14 @@ import android.view.ViewGroup;
  * Created by Jeffrey on 2016/3/6.
  */
 public class OldOrderFragment extends Fragment {
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public OldOrderFragment(){
+
     }
+
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        return inflater.inflate(R.layout.fragment_old_order, container, false);
     }
 }

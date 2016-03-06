@@ -20,8 +20,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         LinearLayout shoplist = (LinearLayout) findViewById(R.id.ll_shoplist);
         LinearLayout neworder = (LinearLayout) findViewById(R.id.ll_neworder);
+        LinearLayout oldorder = (LinearLayout) findViewById(R.id.ll_oldorder);
+        LinearLayout me = (LinearLayout) findViewById(R.id.ll_me);
+
+
         shoplist.setOnClickListener(this);
         neworder.setOnClickListener(this);
+        oldorder.setOnClickListener(this);
+        me.setOnClickListener(this);
 
     }
 
@@ -41,6 +47,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 FragmentTransaction transaction1 = fragmentManager1.beginTransaction();
                 transaction1.replace(R.id.fl_content,newOrderFragment);
                 transaction1.commit();
+                break;
+            case R.id.ll_oldorder:
+                OldOrderFragment oldOrderFragment = new OldOrderFragment();
+                FragmentManager fragmentManager2 = getFragmentManager();
+                FragmentTransaction transaction2 = fragmentManager2.beginTransaction();
+                transaction2.replace(R.id.fl_content,oldOrderFragment);
+                transaction2.commit();
+                break;
+            case R.id.ll_me:
+                MeFragment meFragment = new MeFragment();
+                FragmentManager fragmentManager3 = getFragmentManager();
+                FragmentTransaction transaction3 = fragmentManager3.beginTransaction();
+                transaction3.replace(R.id.fl_content,meFragment);
+                transaction3.commit();
+                break;
             default:
                 break;
 
