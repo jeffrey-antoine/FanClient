@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">飯糰</string>
+    <string name="btnBottom1">外送</string>
+    <string name="btnBottom2">訂單</string>
+    <string name="btnBottom3">歷史</string>
+    <string name="btnBottom4">我的</string>
+    <string name="tstReturnAgain">再按一次退出飯糰</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
