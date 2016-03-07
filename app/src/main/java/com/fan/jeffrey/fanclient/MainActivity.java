@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         LinearLayout me = (LinearLayout) findViewById(R.id.ll_me);
 
 
+
         shoplist.setOnClickListener(this);
         neworder.setOnClickListener(this);
         oldorder.setOnClickListener(this);
