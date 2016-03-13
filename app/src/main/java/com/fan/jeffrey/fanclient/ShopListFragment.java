@@ -1,6 +1,7 @@
 package com.fan.jeffrey.fanclient;
 
 
+import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +16,7 @@ import java.util.List;
 import javax.crypto.KeyAgreement;
 
 
-public class ShopListFragment extends android.app.Fragment {
+public class ShopListFragment extends Fragment {
     private String[] data = { "Apple", "Banana", "Orange", "Watermelon",
             "Pear", "Grape", "Pineapple", "Strawberry", "Cherry", "Mango","Apple", "Banana", "Orange", "Watermelon",
             "Pear", "Grape", "Pineapple", "Strawberry", "Cherry", "Mango" };
@@ -39,19 +40,31 @@ public class ShopListFragment extends android.app.Fragment {
         shoplist.setAdapter(adapter);
         return view;
     }
-
+    // pay attention to the size of pic
     private void initShop(){
-        Shop ejpg = new Shop("e到校",R.drawable.ejpg);
+        Shop ejpg = new Shop("e到校",R.drawable.ejpg111);
         ShopList.add(ejpg);
-        Shop kast = new Shop("KAST",R.drawable.kast);
+        Shop kast = new Shop("KAST",R.drawable.ejpg111);
         ShopList.add(kast);
-        Shop lovehomediary = new Shop("爱家日记", R.drawable.lovehomediary);
+        Shop lovehomediary = new Shop("爱家日记", R.drawable.ejpg111);
         ShopList.add(lovehomediary);
-        Shop wisdomsave = new Shop("慧理财", R.drawable.widsomsave);
+        Shop wisdomsave = new Shop("慧理财", R.drawable.ejpg111);
         ShopList.add(wisdomsave);
-        Shop clouddisaterproof = new Shop("云容灾",R.drawable.clouddisasterproof);
+        Shop clouddisaterproof = new Shop("云容灾",R.drawable.ejpg111);
         ShopList.add(clouddisaterproof);
-        Shop rotating = new Shop("转吧",R.drawable.rotating);
+        Shop rotating = new Shop("转吧",R.drawable.ejpg111);
         ShopList.add(rotating);
+        Shop ejpg1 = new Shop("e到校",R.drawable.ejpg111);
+        ShopList.add(ejpg1);
+        Shop kast1 = new Shop("KAST",R.drawable.ejpg111);
+        ShopList.add(kast1);
+        Shop lovehomediary1 = new Shop("爱家日记", R.drawable.ejpg111);
+        ShopList.add(lovehomediary1);
+        Shop wisdomsave1 = new Shop("慧理财", R.drawable.ejpg111);
+        ShopList.add(wisdomsave1);
+        Shop clouddisaterproof1 = new Shop("云容灾",R.drawable.ejpg111);
+        ShopList.add(clouddisaterproof1);
+        Shop rotating1 = new Shop("转吧",R.drawable.ejpg111);
+        ShopList.add(rotating1);
     }
 }

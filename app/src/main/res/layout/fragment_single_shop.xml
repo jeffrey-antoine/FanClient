@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <ImageView
+
+            android:id="@+id/single_shopimage"
+            android:layout_width="160dp"
+            android:layout_height="140dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp" />
+
+        <TextView
+            android:id="@+id/tv_single_shopname"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_alignTop="@+id/single_shopimage"
+            android:layout_toRightOf="@+id/single_shopimage"
+            android:layout_toEndOf="@+id/single_shopimage"
+            android:layout_marginLeft="39dp"
+            android:layout_marginStart="39dp" />
+
+        <ImageView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/star"
+            android:layout_gravity="center_horizontal"
+            android:layout_below="@+id/tv_single_shopname"
+            android:layout_alignLeft="@+id/tv_single_shopname"
+            android:layout_alignStart="@+id/tv_single_shopname" />
+
+    </RelativeLayout>
+    <ListView
+        android:id="@+id/lv_disheslist"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></ListView>
+
+</LinearLayout>
