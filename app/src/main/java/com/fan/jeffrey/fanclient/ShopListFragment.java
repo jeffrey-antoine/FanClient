@@ -2,10 +2,13 @@ package com.fan.jeffrey.fanclient;
 
 
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -16,7 +19,7 @@ import java.util.List;
 import javax.crypto.KeyAgreement;
 
 
-public class ShopListFragment extends Fragment {
+public class ShopListFragment extends Fragment implements View.OnClickListener {
     private String[] data = { "Apple", "Banana", "Orange", "Watermelon",
             "Pear", "Grape", "Pineapple", "Strawberry", "Cherry", "Mango","Apple", "Banana", "Orange", "Watermelon",
             "Pear", "Grape", "Pineapple", "Strawberry", "Cherry", "Mango" };
@@ -40,6 +43,7 @@ public class ShopListFragment extends Fragment {
         shoplist.setAdapter(adapter);
         return view;
     }
+
     // pay attention to the size of pic
     private void initShop(){
         Shop ejpg = new Shop("e到校",R.drawable.ejpg111);
@@ -66,5 +70,14 @@ public class ShopListFragment extends Fragment {
         ShopList.add(clouddisaterproof1);
         Shop rotating1 = new Shop("转吧",R.drawable.ejpg111);
         ShopList.add(rotating1);
+    }
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        return super.onContextItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+//TODO implements the code here!!
     }
 }
