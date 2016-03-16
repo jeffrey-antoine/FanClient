@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -21,11 +22,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     NewOrderFragment newOrderFragment = new NewOrderFragment();
     OldOrderFragment oldOrderFragment = new OldOrderFragment();
     MeFragment meFragment = new MeFragment();
-    //Fragment[] Fragmentlist = {shopListFragment, newOrderFragment, oldOrderFragment,}
 
+    //Fragment[] Fragmentlist = {shopListFragment, newOrderFragment, oldOrderFragment,}
+    //four bottom TextView
+    private TextView tv_shoplist;
+    private TextView tv_neworder;
+    private TextView tv_oldorder;
+    private TextView tv_me;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //
+        initView();
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
         Log.i("ISADD", "home activity");
@@ -40,12 +48,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         oldorder.setOnClickListener(this);
         me.setOnClickListener(this);
         addFragment(shopListFragment, ShopListFragmentTag);
+        tv_shoplist.setTextColor(0xff1B940A);
     }
 
+    public void initView() {
+        this.tv_shoplist = (TextView) findViewById(R.id.tv_shoplist);
+        this.tv_neworder = (TextView) findViewById(R.id.tv_neworder);
+        this.tv_oldorder = (TextView) findViewById(R.id.tv_oldorder);
+        this.tv_me = (TextView) findViewById(R.id.tv_me);
+    }
+
+    public void initColor() {
+        tv_shoplist.setTextColor(0xffffffff);
+        tv_neworder.setTextColor(0xffffffff);
+        tv_oldorder.setTextColor(0xffffffff);
+        tv_me.setTextColor(0xffffffff);
+    }
     @Override
     public void onClick(View v) {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
+        initColor();
         switch (v.getId()) {
             case R.id.ll_shoplist:
                 switchContent(fragmentManager, transaction, fragmentManager.findFragmentById(R.id.fl_content), shopListFragment, ShopListFragmentTag);
@@ -55,24 +78,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                }
 //                if(oldOrderFragment.isAdded()) transaction.hide(oldOrderFragment).commit();
 //                if(meFragment.isAdded()) transaction.hide(meFragment).commit();
+                tv_shoplist.setTextColor(0xff1B940A);
                 break;
             case R.id.ll_neworder:
                 switchContent(fragmentManager, transaction, fragmentManager.findFragmentById(R.id.fl_content), newOrderFragment, NewOrderFragmentTag);
 //                if(oldOrderFragment.isAdded()) transaction.hide(oldOrderFragment).commit();
 //                if(meFragment.isAdded()) transaction.hide(meFragment).commit();
 //                if(shopListFragment.isAdded()) transaction.hide(shopListFragment).commit();
+                tv_neworder.setTextColor(0xff1B940A);
                 break;
             case R.id.ll_oldorder:
                 switchContent(fragmentManager, transaction, fragmentManager.findFragmentById(R.id.fl_content), oldOrderFragment, OlderOrderFragmentTag);
 //                if(newOrderFragment.isAdded()) transaction.hide(newOrderFragment).commit();
 //                if(meFragment.isAdded()) transaction.hide(meFragment).commit();
 //                if(shopListFragment.isAdded()) transaction.hide(shopListFragment).commit();
+                tv_oldorder.setTextColor(0xff1B940A);
                 break;
             case R.id.ll_me:
                 switchContent(fragmentManager, transaction, fragmentManager.findFragmentById(R.id.fl_content), meFragment, MeFragmentTag);
 //                if(newOrderFragment.isAdded()) transaction.hide(newOrderFragment).commit();
 //                if(oldOrderFragment.isAdded()) transaction.hide(oldOrderFragment).commit();
 //                if(shopListFragment.isAdded()) transaction.hide(shopListFragment).commit();
+                tv_me.setTextColor(0xff1B940A);
                 break;
             default:
                 break;

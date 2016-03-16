@@ -4,6 +4,7 @@ package com.fan.jeffrey.fanclient;
 import android.app.Fragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,9 +21,6 @@ import javax.crypto.KeyAgreement;
 
 
 public class ShopListFragment extends Fragment implements View.OnClickListener {
-    private String[] data = { "Apple", "Banana", "Orange", "Watermelon",
-            "Pear", "Grape", "Pineapple", "Strawberry", "Cherry", "Mango","Apple", "Banana", "Orange", "Watermelon",
-            "Pear", "Grape", "Pineapple", "Strawberry", "Cherry", "Mango" };
     private List<Shop> ShopList = new ArrayList<Shop>();
     public ShopListFragment() {
         // Required empty public constructor
@@ -48,7 +46,9 @@ public class ShopListFragment extends Fragment implements View.OnClickListener {
     private void initShop(){
         String[] aa = {"滷肉飯","和風排骨飯","椒麻雞飯","雞腿飯","親子丼"};
         String[] bb = {"自助餐","麥當勞","KFC","蒜泥白肉飯","招牌面"};
+//        R.drawable.ejpg111 is a int!!
         Shop ejpg = new Shop("e到校",R.drawable.ejpg111,aa);
+        Log.i("ISADD", "shopImageid = " + ejpg.getShopImageId());
         ShopList.add(ejpg);
         Shop kast = new Shop("KAST",R.drawable.ejpg111,aa);
         ShopList.add(kast);

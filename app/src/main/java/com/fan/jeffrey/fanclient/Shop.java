@@ -18,7 +18,8 @@ public class Shop {
     public String getShopName(){
         return shopName;
     }
-    public java.lang.String[] getShopdishes() {
+
+    public String[] getShopdishes() {
         return shopdishes;
     }
 }
