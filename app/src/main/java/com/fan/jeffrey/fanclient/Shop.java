@@ -6,10 +6,11 @@ package com.fan.jeffrey.fanclient;
 public class Shop {
     private String shopName;
     private int shopImageId;
-
-    public Shop(String shopName,int shopImageId){
+    private String[] shopdishes;
+    public Shop(String shopName,int shopImageId,String[] shopdishes){
         this.shopImageId = shopImageId;
         this.shopName = shopName;
+        this.shopdishes = shopdishes;
     }
     public int getShopImageId(){
         return shopImageId;
@@ -17,5 +18,7 @@ public class Shop {
     public String getShopName(){
         return shopName;
     }
-
+    public java.lang.String[] getShopdishes() {
+        return shopdishes;
+    }
 }

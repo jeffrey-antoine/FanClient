@@ -46,29 +46,31 @@ public class ShopListFragment extends Fragment implements View.OnClickListener {
 
     // pay attention to the size of pic
     private void initShop(){
-        Shop ejpg = new Shop("e到校",R.drawable.ejpg111);
+        String[] aa = {"滷肉飯","和風排骨飯","椒麻雞飯","雞腿飯","親子丼"};
+        String[] bb = {"自助餐","麥當勞","KFC","蒜泥白肉飯","招牌面"};
+        Shop ejpg = new Shop("e到校",R.drawable.ejpg111,aa);
         ShopList.add(ejpg);
-        Shop kast = new Shop("KAST",R.drawable.ejpg111);
+        Shop kast = new Shop("KAST",R.drawable.ejpg111,aa);
         ShopList.add(kast);
-        Shop lovehomediary = new Shop("爱家日记", R.drawable.ejpg111);
+        Shop lovehomediary = new Shop("爱家日记", R.drawable.ejpg111,aa);
         ShopList.add(lovehomediary);
-        Shop wisdomsave = new Shop("慧理财", R.drawable.ejpg111);
+        Shop wisdomsave = new Shop("慧理财", R.drawable.ejpg111,aa);
         ShopList.add(wisdomsave);
-        Shop clouddisaterproof = new Shop("云容灾",R.drawable.ejpg111);
+        Shop clouddisaterproof = new Shop("云容灾",R.drawable.ejpg111,bb);
         ShopList.add(clouddisaterproof);
-        Shop rotating = new Shop("转吧",R.drawable.ejpg111);
+        Shop rotating = new Shop("转吧",R.drawable.ejpg111,bb);
         ShopList.add(rotating);
-        Shop ejpg1 = new Shop("e到校",R.drawable.ejpg111);
+        Shop ejpg1 = new Shop("e到校",R.drawable.ejpg111,aa);
         ShopList.add(ejpg1);
-        Shop kast1 = new Shop("KAST",R.drawable.ejpg111);
+        Shop kast1 = new Shop("KAST",R.drawable.ejpg111,bb);
         ShopList.add(kast1);
-        Shop lovehomediary1 = new Shop("爱家日记", R.drawable.ejpg111);
+        Shop lovehomediary1 = new Shop("爱家日记", R.drawable.ejpg111,aa);
         ShopList.add(lovehomediary1);
-        Shop wisdomsave1 = new Shop("慧理财", R.drawable.ejpg111);
+        Shop wisdomsave1 = new Shop("慧理财", R.drawable.ejpg111,bb);
         ShopList.add(wisdomsave1);
-        Shop clouddisaterproof1 = new Shop("云容灾",R.drawable.ejpg111);
+        Shop clouddisaterproof1 = new Shop("云容灾",R.drawable.ejpg111,aa);
         ShopList.add(clouddisaterproof1);
-        Shop rotating1 = new Shop("转吧",R.drawable.ejpg111);
+        Shop rotating1 = new Shop("转吧",R.drawable.ejpg111,bb);
         ShopList.add(rotating1);
     }
     @Override
