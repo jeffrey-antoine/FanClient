@@ -4,9 +4,23 @@
     <string name="btnBottom2">訂單</string>
     <string name="btnBottom3">歷史</string>
     <string name="btnBottom4">我的</string>
+    <string name="btnTitle1">周邊餐廳</string>
     <string name="tstReturnAgain">再按一次退出飯糰</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_dishes">DishesActivity</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">電郵</string>
+    <string name="prompt_password">密碼 (可選)</string>
+    <string name="action_sign_in">登陸或註冊</string>
+    <string name="action_sign_in_short">登陸</string>
+    <string name="error_invalid_email">郵箱地址不存在</string>
+    <string name="error_invalid_password">密碼過短</string>
+    <string name="error_incorrect_password">密碼錯誤</string>
+    <string name="error_field_required">必填</string>
+    <string name="permission_rationale">"需要訪問聯絡人"
+    </string>
 </resources>

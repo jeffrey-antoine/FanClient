@@ -1,4 +1,4 @@
-package com.fan.jeffrey.fanclient;
+package com.fan.jeffrey.fanclient.subclass;
 
 /**
  * Created by piaox on 2016/3/7.

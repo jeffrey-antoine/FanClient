@@ -1,4 +1,4 @@
-package com.fan.jeffrey.fanclient;
+package com.fan.jeffrey.fanclient.activity;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -6,9 +6,17 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.fan.jeffrey.fanclient.fragment.MeFragment;
+import com.fan.jeffrey.fanclient.fragment.NewOrderFragment;
+import com.fan.jeffrey.fanclient.fragment.OldOrderFragment;
+import com.fan.jeffrey.fanclient.R;
+import com.fan.jeffrey.fanclient.fragment.ShopListFragment;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -31,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView tv_neworder;
     private TextView tv_oldorder;
     private TextView tv_me;
+    //再按一次退出程序的計時
+    private long exitTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +93,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+            if ((System.currentTimeMillis() - exitTime) > 2000) {
+                Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();
+                exitTime = System.currentTimeMillis();
+            } else {
+                finish();
+                System.exit(0);
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
     public void initView() {
         this.tv_shoplist = (TextView) findViewById(R.id.tv_shoplist);
         this.tv_neworder = (TextView) findViewById(R.id.tv_neworder);
@@ -107,16 +133,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if (!to.isAdded()) {
             Log.i("ISADD", "Not Find added fragment!");
-            transaction.add(R.id.fl_content, to, Tag).commit();
-        } else {
-            Log.i("ISADD", "Find added fragment!");
-//            for (int i = 0; i < Taglist.length; i++) {
-//                if (Tag != Taglist[i]) {
-//                    Log.i("ISADD", "Need to hide the other fragment!" + i);
-//                    transaction.hide(fragmentManager.findFragmentByTag(Taglist[i]));
-//                }
-            transaction.show(to).commit();
-            }
+            transaction.add(R.id.fl_content, to, Tag);
+        }
+        transaction.show(to).commit();
 
     }
 
@@ -131,4 +150,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             transaction.hide(meFragment);
 
     }
-    }
+}

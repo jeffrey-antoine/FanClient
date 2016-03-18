@@ -1,4 +1,4 @@
-package com.fan.jeffrey.fanclient;
+package com.fan.jeffrey.fanclient.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.fan.jeffrey.fanclient.R;
+import com.fan.jeffrey.fanclient.subclass.Shop;
 
 import java.util.List;
 

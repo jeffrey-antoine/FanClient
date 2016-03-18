@@ -1,4 +1,4 @@
-package com.fan.jeffrey.fanclient;
+package com.fan.jeffrey.fanclient.fragment;
 
 
 import android.app.Fragment;
@@ -12,6 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
+import com.fan.jeffrey.fanclient.R;
+import com.fan.jeffrey.fanclient.subclass.Shop;
+import com.fan.jeffrey.fanclient.adapter.ShopAdapter;
+import com.fan.jeffrey.fanclient.activity.DishesActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,8 +58,8 @@ public class ShopListFragment extends Fragment implements AdapterView.OnItemClic
 
     // pay attention to the size of pic
     private void initShop() {
-        String[] aa = {"滷肉飯", "和風排骨飯", "椒麻雞飯", "雞腿飯", "親子丼"};
-        String[] bb = {"自助餐", "麥當勞", "KFC", "蒜泥白肉飯", "招牌面"};
+        String[] aa = {"滷肉飯", "和風排骨飯", "椒麻雞飯", "雞腿飯", "親子丼", "自助餐", "麥當勞", "KFC", "蒜泥白肉飯", "招牌面"};
+        String[] bb = {"自助餐", "麥當勞", "KFC", "蒜泥白肉飯", "招牌面", "滷肉飯", "和風排骨飯", "椒麻雞飯", "雞腿飯", "親子丼"};
 //        R.drawable.ejpg111 is a int!!
         Shop ejpg = new Shop("e到校", R.drawable.ejpg111, aa);
         Log.i("ISADD", "shopImageid = " + ejpg.getShopImageId());

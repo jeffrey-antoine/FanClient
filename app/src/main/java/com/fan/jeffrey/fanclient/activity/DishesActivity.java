@@ -1,10 +1,14 @@
-package com.fan.jeffrey.fanclient;
+package com.fan.jeffrey.fanclient.activity;
 
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.Log;
+
+import com.fan.jeffrey.fanclient.fragment.DishFragment;
+import com.fan.jeffrey.fanclient.R;
+import com.fan.jeffrey.fanclient.fragment.SingleShopFragment;
 
 public class DishesActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {

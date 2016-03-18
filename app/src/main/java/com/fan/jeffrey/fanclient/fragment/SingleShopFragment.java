@@ -1,4 +1,4 @@
-package com.fan.jeffrey.fanclient;
+package com.fan.jeffrey.fanclient.fragment;
 
 import android.app.Fragment;
 import android.content.Intent;
@@ -10,6 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.fan.jeffrey.fanclient.R;
 
 /**
  * Created by piaox on 2016/3/13.
