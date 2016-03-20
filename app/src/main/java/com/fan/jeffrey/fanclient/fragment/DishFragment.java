@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * Created by piaox on 2016/3/18.
  */
-public class DishFragment extends Fragment implements AdapterView.OnItemClickListener {
+public class DishFragment extends Fragment {
     ListView dishlistview;
     private List<Dishes> DishesList = new ArrayList<>();
     private DishAdapter adapter;
@@ -39,19 +39,12 @@ public class DishFragment extends Fragment implements AdapterView.OnItemClickLis
         initDishes();
         View view = inflater.inflate(R.layout.fragment_dish, container, false);
         dishlistview = (ListView) view.findViewById(R.id.lv_dishlist);
-
         adapter = new DishAdapter(getActivity(), R.layout.dishitem, DishesList);
 
         dishlistview.setAdapter(adapter);
-
-        dishlistview.setOnItemClickListener(this);
         Log.v("ISADD", "Get Fragment");
+        adapter.notifyDataSetChanged();
         return view;
-
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
     }
 
@@ -61,8 +54,8 @@ public class DishFragment extends Fragment implements AdapterView.OnItemClickLis
         float[] dishPrices = intent.getFloatArrayExtra("dish_Prices");
         String[] dishComments = intent.getStringArrayExtra("dish_Comments");
         for (int i = 0; i < dishes.length; i++) {
-            Dishes dishes1 = new Dishes(dishes[i], R.drawable.d1, dishPrices[i], dishComments[i]);
-            DishesList.add(dishes1);
+            DishesList.add(new Dishes(dishes[i], R.drawable.d1, dishPrices[i], dishComments[i]));
+            Log.i("ISADD", "Get Fragment");
         }
     }
 }

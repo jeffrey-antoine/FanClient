@@ -1,6 +1,7 @@
 package com.fan.jeffrey.fanclient.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,7 @@ public class ShopAdapter extends ArrayAdapter<Shop> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Shop shop = getItem(position);
+        Log.i("ISADD", "ShopList position:" + position);
         View view = LayoutInflater.from(getContext()).inflate(resourceId, null);
         ImageView shopImage = (ImageView) view.findViewById(R.id.shopImage);
         TextView shopName = (TextView) view.findViewById(R.id.shopName);

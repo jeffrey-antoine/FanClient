@@ -1,43 +1,174 @@
 package com.fan.jeffrey.fanclient.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fan.jeffrey.fanclient.R;
 import com.fan.jeffrey.fanclient.subclass.Dishes;
 
 import org.w3c.dom.Text;
 
+import java.lang.reflect.Array;
 import java.util.AbstractCollection;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by piaox on 2016/3/19.
  */
-public class DishAdapter extends ArrayAdapter<Dishes> {
+public class DishAdapter extends BaseAdapter {
+    private int[] dishcount;
     private int resourceId;
+    private List<Dishes> dishesArrayList;
+    private Context myContext;
+    private LayoutInflater myInflater;
+    private ViewHolder viewHolder;
+    private View view;
+
 
     public DishAdapter(Context context, int textViewResourceId, List<Dishes> objects) {
-        super(context, textViewResourceId, objects);
+        dishesArrayList = objects;
+        myContext = context;
+        myInflater = (LayoutInflater) myContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         resourceId = textViewResourceId;
+        dishcount = new int[dishesArrayList.size()];
+
+        for (int i = 0; i < dishcount.length; i++) dishcount[i] = i;
+    }
+
+    @Override
+    public int getCount() {
+        return dishesArrayList.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return dishesArrayList.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    public void removeItem(int position) {
+        dishesArrayList.remove(position);
+        this.notifyDataSetChanged();
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        Dishes dish = getItem(position);
-        View view = LayoutInflater.from(getContext()).inflate(resourceId, null);
-        ImageView dishImage = (ImageView) view.findViewById(R.id.iv_dishesImage);
-        TextView dishname = (TextView) view.findViewById(R.id.tv_dishesName);
-        TextView dishcomment = (TextView) view.findViewById(R.id.tv_dishcomment);
-        TextView dishprice = (TextView) view.findViewById(R.id.tv_dishesprice);
-        dishImage.setImageResource(dish.getDishImageId());
-        dishprice.setText("￥" + dish.getDishPrice());
-        dishname.setText(dish.getDishName());
-        dishcomment.setText(dish.getDishcomment());
-        return view;
+        final int innerposition = position;
+
+        Log.i("ISADD", "Positon is " + position);
+
+        if (convertView == null) {
+            convertView = myInflater.inflate(resourceId, null);
+
+            viewHolder = new ViewHolder();
+
+            viewHolder.dishImage = (ImageView) convertView.findViewById(R.id.iv_dishesImage);
+            viewHolder.dishname = (TextView) convertView.findViewById(R.id.tv_dishesName);
+            viewHolder.dishcomment = (TextView) convertView.findViewById(R.id.tv_dishcomment);
+            viewHolder.dishprice = (TextView) convertView.findViewById(R.id.tv_dishesprice);
+            viewHolder.minus = (ImageView) convertView.findViewById(R.id.iv_minus);
+            viewHolder.dishcount = (TextView) convertView.findViewById(R.id.tv_numberofdishes);
+            viewHolder.plus = (ImageView) convertView.findViewById(R.id.iv_plus);
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
+        }
+
+        viewHolder.dishImage.setImageResource(dishesArrayList.get(position).getDishImageId());
+        viewHolder.dishprice.setText("￥" + dishesArrayList.get(position).getDishPrice());
+        viewHolder.dishname.setText(dishesArrayList.get(position).getDishName());
+        viewHolder.dishcomment.setText(dishesArrayList.get(position).getDishcomment());
+        viewHolder.dishcount.setText("" + dishcount[position]);
+        //viewHolder.minus.setTag(position);
+        //viewHolder.plus.setTag(position);
+
+        //Todo change the value of dishcount
+
+        viewHolder.minus.setOnClickListener(new Mylistener(position) {
+            @Override
+            public void onClick(View v) {
+                if (dishcount[innerposition] > 0) dishcount[innerposition]--;
+                viewHolder.dishcount.setText(dishcount[innerposition] + "");
+                Log.i("ISADD", "minus something here!" + innerposition);
+            }
+
+        });
+        viewHolder.plus.setOnClickListener(new Mylistener(position) {
+            @Override
+            public void onClick(View v) {
+                dishcount[innerposition]++;
+
+                viewHolder.dishcount.setText(dishcount[innerposition] + "");
+                if (dishcount[innerposition] > 0) {
+                    viewHolder.minus.setVisibility(View.VISIBLE);
+                    //Todo Something with the shopcart;
+                }
+                Log.i("ISADD", "add something here!" + innerposition);
+            }
+        });
+        this.notifyDataSetChanged();
+        return convertView;
+    }
+
+    public final static class ViewHolder {
+        public ImageView dishImage;
+        public TextView dishname;
+        public TextView dishcomment;
+        public TextView dishprice;
+        public ImageView minus;
+        public TextView dishcount;
+        public ImageView plus;
+    }
+
+    private class Mylistener implements View.OnClickListener {
+
+        int mPosition;
+
+        public Mylistener(int mPosition) {
+            this.mPosition = mPosition;
+            Log.i("ISADD", "This is the first position" + mPosition);
+        }
+
+        @Override
+        public void onClick(View v) {
+
+            Log.i("ISADD", "Click on board!" + v.getId());
+            Log.i("ISADD", "Click on board!" + R.id.iv_minus);
+            Log.i("ISADD", "Click on board!" + R.id.iv_plus);
+            Log.i("ISADD", "Click on board!" + mPosition);
+
+            switch (v.getId()) {
+                case (R.id.iv_minus):
+                    if (dishcount[mPosition] > 0) dishcount[mPosition]--;
+
+                    if (dishcount[mPosition] <= 0) viewHolder.minus.setVisibility(View.INVISIBLE);
+
+                    viewHolder.dishcount.setText("" + dishcount[mPosition]);
+                    Log.i("ISADD", "Minus on board! Dishcount =  " + dishcount[mPosition]);
+                    break;
+                case (R.id.iv_plus):
+
+                    dishcount[mPosition]++;
+                    if (dishcount[mPosition] > 0) viewHolder.minus.setVisibility(View.VISIBLE);
+                    viewHolder.dishcount.setText("" + dishcount[mPosition]);
+                    Log.i("ISADD", "Plus on board! Dishcount =  " + dishcount[mPosition]);
+                    //view.refreshDrawableState();
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }

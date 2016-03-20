@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="80dp"
+    android:descendantFocusability="blocksDescendants"
     android:orientation="horizontal">
     <ImageView
         android:id="@+id/iv_dishesImage"
@@ -12,13 +13,15 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="4"
+        android:descendantFocusability="blocksDescendants"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:descendantFocusability="blocksDescendants"
             android:orientation="horizontal">
 
             <TextView
@@ -27,6 +30,7 @@
                 android:layout_height="40dp"
                 android:layout_gravity="center_vertical|left"
                 android:layout_weight="3"
+                android:ems="10"
                 android:gravity="center_vertical|center_horizontal"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
@@ -47,7 +51,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:descendantFocusability="blocksDescendants"
+            android:focusable="false">
 
             <TextView
                 android:id="@+id/tv_dishcomment"
@@ -59,27 +65,30 @@
                 android:textSize="15dp" />
 
             <ImageView
-                android:id="@+id/ibt_minus"
+                android:id="@+id/iv_minus"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center_horizontal|center_vertical"
-                android:background="@drawable/minus" />
+                android:background="@drawable/minus"
+                android:focusable="false"
+                android:visibility="invisible" />
 
-            <EditText
-                android:id="@+id/et_numberofdishes"
+            <TextView
+                android:id="@+id/tv_numberofdishes"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:layout_gravity="center_horizontal|center_vertical"
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="number" />
 
             <ImageView
-                android:id="@+id/ibt_plus"
+                android:id="@+id/iv_plus"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center_horizontal|center_vertical"
-                android:background="@drawable/plus" />
+                android:background="@drawable/plus"
+                android:focusable="false" />
 
         </LinearLayout>
 
