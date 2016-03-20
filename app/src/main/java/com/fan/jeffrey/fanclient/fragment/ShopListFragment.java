@@ -31,11 +31,13 @@ public class ShopListFragment extends Fragment implements AdapterView.OnItemClic
         // Required empty public constructor
     }
 
-    public static void actionStart(Context context, String shopName, int shopImageId, String[] dishes) {
+    public static void actionStart(Context context, String shopName, int shopImageId, String[] dishes, float[] dishPrices, String[] dishComments) {
         Intent intent = new Intent(context, DishesActivity.class);
         intent.putExtra("shop_Name", shopName);
         intent.putExtra("shop_ImageId", shopImageId);
         intent.putExtra("dishes", dishes);
+        intent.putExtra("dish_Prices", dishPrices);
+        intent.putExtra("dish_Comments", dishComments);
         context.startActivity(intent);
         Log.i("ISADD", intent.getStringExtra("shop_Name"));
     }
@@ -60,31 +62,33 @@ public class ShopListFragment extends Fragment implements AdapterView.OnItemClic
     private void initShop() {
         String[] aa = {"滷肉飯", "和風排骨飯", "椒麻雞飯", "雞腿飯", "親子丼", "自助餐", "麥當勞", "KFC", "蒜泥白肉飯", "招牌面"};
         String[] bb = {"自助餐", "麥當勞", "KFC", "蒜泥白肉飯", "招牌面", "滷肉飯", "和風排骨飯", "椒麻雞飯", "雞腿飯", "親子丼"};
+        float[] price = {17.85f, 29.85f, 19.85f, 18.85f, 17.85f, 17.85f, 30.85f, 17.85f, 17.85f, 17.85f};
+
 //        R.drawable.ejpg111 is a int!!
-        Shop ejpg = new Shop("e到校", R.drawable.ejpg111, aa);
+        Shop ejpg = new Shop("e到校", R.drawable.ejpg111, aa, price, aa);
         Log.i("ISADD", "shopImageid = " + ejpg.getShopImageId());
         ShopList.add(ejpg);
-        Shop kast = new Shop("KAST", R.drawable.ejpg111, aa);
+        Shop kast = new Shop("KAST", R.drawable.ejpg111, aa, price, aa);
         ShopList.add(kast);
-        Shop lovehomediary = new Shop("爱家日记", R.drawable.ejpg111, aa);
+        Shop lovehomediary = new Shop("爱家日记", R.drawable.ejpg111, aa, price, aa);
         ShopList.add(lovehomediary);
-        Shop wisdomsave = new Shop("慧理财", R.drawable.ejpg111, aa);
+        Shop wisdomsave = new Shop("慧理财", R.drawable.ejpg111, aa, price, aa);
         ShopList.add(wisdomsave);
-        Shop clouddisaterproof = new Shop("云容灾", R.drawable.ejpg111, bb);
+        Shop clouddisaterproof = new Shop("云容灾", R.drawable.ejpg111, bb, price, bb);
         ShopList.add(clouddisaterproof);
-        Shop rotating = new Shop("转吧", R.drawable.ejpg111, bb);
+        Shop rotating = new Shop("转吧", R.drawable.ejpg111, bb, price, bb);
         ShopList.add(rotating);
-        Shop ejpg1 = new Shop("e到校", R.drawable.ejpg111, aa);
+        Shop ejpg1 = new Shop("e到校", R.drawable.ejpg111, aa, price, aa);
         ShopList.add(ejpg1);
-        Shop kast1 = new Shop("KAST", R.drawable.ejpg111, bb);
+        Shop kast1 = new Shop("KAST", R.drawable.ejpg111, bb, price, bb);
         ShopList.add(kast1);
-        Shop lovehomediary1 = new Shop("爱家日记", R.drawable.ejpg111, aa);
+        Shop lovehomediary1 = new Shop("爱家日记", R.drawable.ejpg111, aa, price, aa);
         ShopList.add(lovehomediary1);
-        Shop wisdomsave1 = new Shop("慧理财", R.drawable.ejpg111, bb);
+        Shop wisdomsave1 = new Shop("慧理财", R.drawable.ejpg111, bb, price, bb);
         ShopList.add(wisdomsave1);
-        Shop clouddisaterproof1 = new Shop("云容灾", R.drawable.ejpg111, aa);
+        Shop clouddisaterproof1 = new Shop("云容灾", R.drawable.ejpg111, aa, price, aa);
         ShopList.add(clouddisaterproof1);
-        Shop rotating1 = new Shop("转吧", R.drawable.ejpg111, bb);
+        Shop rotating1 = new Shop("转吧", R.drawable.ejpg111, bb, price, bb);
         ShopList.add(rotating1);
     }
 
@@ -96,7 +100,7 @@ public class ShopListFragment extends Fragment implements AdapterView.OnItemClic
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Shop shop = ShopList.get(position);
-        actionStart(getActivity(), shop.getShopName(), shop.getShopImageId(), shop.getShopdishes());
+        actionStart(getActivity(), shop.getShopName(), shop.getShopImageId(), shop.getShopdishes(), shop.getDishprices(), shop.getDishcomments());
         //Log.i("ISADD",shop.getShopName());
     }
 }

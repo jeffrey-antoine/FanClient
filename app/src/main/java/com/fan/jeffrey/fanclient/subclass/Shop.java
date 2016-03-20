@@ -7,10 +7,15 @@ public class Shop {
     private String shopName;
     private int shopImageId;
     private String[] shopdishes;
-    public Shop(String shopName,int shopImageId,String[] shopdishes){
+    private float[] dishprices;
+    private String[] dishcomments;
+
+    public Shop(String shopName, int shopImageId, String[] shopdishes, float[] dishprices, String[] dishcomments) {
         this.shopImageId = shopImageId;
         this.shopName = shopName;
         this.shopdishes = shopdishes;
+        this.dishcomments = dishcomments;
+        this.dishprices = dishprices;
     }
     public int getShopImageId(){
         return shopImageId;
@@ -21,5 +26,13 @@ public class Shop {
 
     public String[] getShopdishes() {
         return shopdishes;
+    }
+
+    public float[] getDishprices() {
+        return dishprices;
+    }
+
+    public String[] getDishcomments() {
+        return dishcomments;
     }
 }
