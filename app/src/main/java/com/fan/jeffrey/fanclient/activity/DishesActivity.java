@@ -27,7 +27,8 @@ public class DishesActivity extends Activity implements View.OnClickListener {
         TextView titleBarShopName = (TextView) findViewById(R.id.tv_titletext);
         ImageView backArrow = (ImageView) findViewById(R.id.iv_backarrow);
         ImageView shopCart = (ImageView) findViewById(R.id.iv_shopcart);
-
+        backArrow.setOnClickListener(this);
+        shopCart.setOnClickListener(this);
         titleBarShopName.setText(shopname);
         SingleShopFragment singleShopFragment = new SingleShopFragment();
         DishFragment dishFragment = new DishFragment();
@@ -37,11 +38,22 @@ public class DishesActivity extends Activity implements View.OnClickListener {
         Log.i("ISADD", "Good in start singleshopfragment");
         transaction.add(R.id.fl_disheslist, dishFragment);
         transaction.commit();
+
     }
 
     @Override
     public void onClick(View v) {
+        switch (v.getId()) {
+            case (R.id.iv_backarrow):
+                finish();
+                break;
+            case (R.id.iv_shopcart):
+                Log.i("ISADD", "shopcart need to be done");
 
+                break;
+            default:
+                break;
+        }
     }
 }
 
