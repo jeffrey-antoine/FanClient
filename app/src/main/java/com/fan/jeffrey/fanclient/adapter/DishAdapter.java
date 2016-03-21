@@ -32,7 +32,7 @@ public class DishAdapter extends BaseAdapter {
     private LayoutInflater myInflater;
     private ViewHolder viewHolder;
     private View view;
-
+    private int innerposition;
 
     public DishAdapter(Context context, int textViewResourceId, List<Dishes> objects) {
         dishesArrayList = objects;
@@ -41,7 +41,7 @@ public class DishAdapter extends BaseAdapter {
         resourceId = textViewResourceId;
         dishcount = new int[dishesArrayList.size()];
 
-        for (int i = 0; i < dishcount.length; i++) dishcount[i] = i;
+        //for (int i = 0; i < dishcount.length; i++) dishcount[i] = 0;
     }
 
     @Override
@@ -59,15 +59,23 @@ public class DishAdapter extends BaseAdapter {
         return position;
     }
 
+    public int getInnerposition() {
+        return innerposition;
+    }
+
+    public void setInnerposition(int position) {
+        innerposition = position;
+    }
+
     public void removeItem(int position) {
         dishesArrayList.remove(position);
         this.notifyDataSetChanged();
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        final int innerposition = position;
+        innerposition = position;
 
-        Log.i("ISADD", "Positon is " + position);
+        Log.i("ISADD", "first InnerPositon is " + innerposition);
 
         if (convertView == null) {
             convertView = myInflater.inflate(resourceId, null);
@@ -93,32 +101,35 @@ public class DishAdapter extends BaseAdapter {
         viewHolder.dishcount.setText("" + dishcount[position]);
         //viewHolder.minus.setTag(position);
         //viewHolder.plus.setTag(position);
-
+        viewHolder.dishcount.setTag(position);
         //Todo change the value of dishcount
 
-        viewHolder.minus.setOnClickListener(new Mylistener(position) {
-            @Override
-            public void onClick(View v) {
-                if (dishcount[innerposition] > 0) dishcount[innerposition]--;
-                viewHolder.dishcount.setText(dishcount[innerposition] + "");
-                Log.i("ISADD", "minus something here!" + innerposition);
-            }
-
-        });
-        viewHolder.plus.setOnClickListener(new Mylistener(position) {
-            @Override
-            public void onClick(View v) {
-                dishcount[innerposition]++;
-
-                viewHolder.dishcount.setText(dishcount[innerposition] + "");
-                if (dishcount[innerposition] > 0) {
-                    viewHolder.minus.setVisibility(View.VISIBLE);
-                    //Todo Something with the shopcart;
-                }
-                Log.i("ISADD", "add something here!" + innerposition);
-            }
-        });
-        this.notifyDataSetChanged();
+        viewHolder.minus.setOnClickListener(new Mylistener(innerposition));
+        viewHolder.plus.setOnClickListener(new Mylistener(innerposition));
+        Log.i("ISADD", "first InnerPositon is " + innerposition);
+//        viewHolder.minus.setOnClickListener(new Mylistener(position) {
+//            @Override
+//            public void onClick(View v) {
+//                if (dishcount[innerposition] > 0) dishcount[innerposition]--;
+//                viewHolder.dishcount.setText(dishcount[innerposition] + "");
+//                Log.i("ISADD", "minus something here!" + innerposition);
+//            }
+//
+//        });
+//        viewHolder.plus.setOnClickListener(new Mylistener(position) {
+//            @Override
+//            public void onClick(View v) {
+//                dishcount[innerposition]++;
+//
+//                viewHolder.dishcount.setText(dishcount[innerposition] + "");
+//                if (dishcount[innerposition] > 0) {
+//                    viewHolder.minus.setVisibility(View.VISIBLE);
+//                    //Todo Something with the shopcart;
+//                }
+//                Log.i("ISADD", "add something here!" + innerposition);
+//            }
+//        });
+//        this.notifyDataSetChanged();
         return convertView;
     }
 
@@ -144,30 +155,39 @@ public class DishAdapter extends BaseAdapter {
         @Override
         public void onClick(View v) {
 
-            Log.i("ISADD", "Click on board!" + v.getId());
-            Log.i("ISADD", "Click on board!" + R.id.iv_minus);
-            Log.i("ISADD", "Click on board!" + R.id.iv_plus);
+            //Log.i("ISADD", "Click on board!" + v.getId());
+            //Log.i("ISADD", "Click on board!" + R.id.iv_minus);
+            //Log.i("ISADD", "Click on board!" + R.id.iv_plus);
             Log.i("ISADD", "Click on board!" + mPosition);
 
             switch (v.getId()) {
                 case (R.id.iv_minus):
+
                     if (dishcount[mPosition] > 0) dishcount[mPosition]--;
 
-                    if (dishcount[mPosition] <= 0) viewHolder.minus.setVisibility(View.INVISIBLE);
+//                    if (dishcount[mPosition] <= 0) viewHolder.minus.setVisibility(View.INVISIBLE);
 
                     viewHolder.dishcount.setText("" + dishcount[mPosition]);
+                    //ViewHolder viewHolder1 = getTag(mPosition);
                     Log.i("ISADD", "Minus on board! Dishcount =  " + dishcount[mPosition]);
+                    notifyDataSetChanged();
+
                     break;
                 case (R.id.iv_plus):
 
                     dishcount[mPosition]++;
-                    if (dishcount[mPosition] > 0) viewHolder.minus.setVisibility(View.VISIBLE);
+                    //viewHolder.plus.setVisibility(View.VISIBLE);
+//                    if (dishcount[mPosition] > 0) {
+//                        viewHolder.minus.setVisibility(View.VISIBLE);
+//                    }
                     viewHolder.dishcount.setText("" + dishcount[mPosition]);
                     Log.i("ISADD", "Plus on board! Dishcount =  " + dishcount[mPosition]);
                     //view.refreshDrawableState();
+                    notifyDataSetChanged();
                     break;
                 default:
                     break;
+
             }
         }
     }

@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * Created by piaox on 2016/3/18.
  */
-public class DishFragment extends Fragment {
+public class DishFragment extends Fragment implements AdapterView.OnItemClickListener {
     ListView dishlistview;
     private List<Dishes> DishesList = new ArrayList<>();
     private DishAdapter adapter;
@@ -43,6 +43,7 @@ public class DishFragment extends Fragment {
 
         dishlistview.setAdapter(adapter);
         Log.v("ISADD", "Get Fragment");
+        dishlistview.setOnItemClickListener(this);
         adapter.notifyDataSetChanged();
         return view;
 
@@ -57,5 +58,12 @@ public class DishFragment extends Fragment {
             DishesList.add(new Dishes(dishes[i], R.drawable.d1, dishPrices[i], dishComments[i]));
             Log.i("ISADD", "Get Fragment");
         }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Dishes dishes = DishesList.get(position);
+        adapter.setInnerposition(position);
+        Log.v("ISADD", "Innerposition = " + adapter.getInnerposition());
     }
 }

@@ -101,6 +101,6 @@ public class ShopListFragment extends Fragment implements AdapterView.OnItemClic
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Shop shop = ShopList.get(position);
         actionStart(getActivity(), shop.getShopName(), shop.getShopImageId(), shop.getShopdishes(), shop.getDishprices(), shop.getDishcomments());
-        //Log.i("ISADD",shop.getShopName());
+        Log.v("ISADD", "Shoplist position = " + position);
     }
 }
