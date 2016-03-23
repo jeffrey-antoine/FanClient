@@ -133,6 +133,10 @@ public class DishAdapter extends BaseAdapter {
         return convertView;
     }
 
+    public int[] getDishcount() {
+        return dishcount;
+    }
+
     public final static class ViewHolder {
         public ImageView dishImage;
         public TextView dishname;

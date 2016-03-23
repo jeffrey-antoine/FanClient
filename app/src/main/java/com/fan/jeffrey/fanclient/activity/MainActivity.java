@@ -109,6 +109,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return super.onKeyDown(keyCode, event);
     }
 
+    //subfunction
     public void initView() {
         this.tv_shoplist = (TextView) findViewById(R.id.tv_shoplist);
         this.tv_neworder = (TextView) findViewById(R.id.tv_neworder);

@@ -17,6 +17,13 @@ import com.fan.jeffrey.fanclient.fragment.SingleShopFragment;
 import org.w3c.dom.Text;
 
 public class DishesActivity extends Activity implements View.OnClickListener {
+
+    TextView titleBarShopName;
+    ImageView backArrow;
+    ImageView shopCart;
+    TextView redspot;
+    DishFragment dishFragment;
+
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -24,14 +31,16 @@ public class DishesActivity extends Activity implements View.OnClickListener {
         Intent intent = this.getIntent();
         String shopname = intent.getStringExtra("shop_Name");
 
-        TextView titleBarShopName = (TextView) findViewById(R.id.tv_titletext);
-        ImageView backArrow = (ImageView) findViewById(R.id.iv_backarrow);
-        ImageView shopCart = (ImageView) findViewById(R.id.iv_shopcart);
+        titleBarShopName = (TextView) findViewById(R.id.tv_titletext);
+        backArrow = (ImageView) findViewById(R.id.iv_backarrow);
+        shopCart = (ImageView) findViewById(R.id.iv_shopcart);
+        redspot = (TextView) findViewById(R.id.tv_redspot);
+
         backArrow.setOnClickListener(this);
         shopCart.setOnClickListener(this);
         titleBarShopName.setText(shopname);
         SingleShopFragment singleShopFragment = new SingleShopFragment();
-        DishFragment dishFragment = new DishFragment();
+        dishFragment = new DishFragment();
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.add(R.id.fl_singleshop, singleShopFragment);
@@ -50,10 +59,14 @@ public class DishesActivity extends Activity implements View.OnClickListener {
             case (R.id.iv_shopcart):
                 Log.i("ISADD", "shopcart need to be done");
 
+                redspot.setVisibility(View.VISIBLE);
+                Log.i("ISADD", "" + dishFragment.getShopcartnumber());
+                redspot.setText("100");
                 break;
             default:
                 break;
         }
     }
+
 }
 

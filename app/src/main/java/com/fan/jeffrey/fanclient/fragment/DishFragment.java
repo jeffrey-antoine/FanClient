@@ -25,6 +25,7 @@ public class DishFragment extends Fragment implements AdapterView.OnItemClickLis
     ListView dishlistview;
     private List<Dishes> DishesList = new ArrayList<>();
     private DishAdapter adapter;
+    private int shopcartnumber;
     public DishFragment() {
 
     }
@@ -42,7 +43,7 @@ public class DishFragment extends Fragment implements AdapterView.OnItemClickLis
         adapter = new DishAdapter(getActivity(), R.layout.dishitem, DishesList);
 
         dishlistview.setAdapter(adapter);
-        Log.v("ISADD", "Get Fragment");
+        //Log.v("ISADD", "Get Fragment");
         dishlistview.setOnItemClickListener(this);
         adapter.notifyDataSetChanged();
         return view;
@@ -56,7 +57,7 @@ public class DishFragment extends Fragment implements AdapterView.OnItemClickLis
         String[] dishComments = intent.getStringArrayExtra("dish_Comments");
         for (int i = 0; i < dishes.length; i++) {
             DishesList.add(new Dishes(dishes[i], R.drawable.d1, dishPrices[i], dishComments[i]));
-            Log.i("ISADD", "Get Fragment");
+            //Log.i("ISADD", "Get Fragment");
         }
     }
 
@@ -64,6 +65,13 @@ public class DishFragment extends Fragment implements AdapterView.OnItemClickLis
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Dishes dishes = DishesList.get(position);
         adapter.setInnerposition(position);
-        Log.v("ISADD", "Innerposition = " + adapter.getInnerposition());
+        //Log.v("ISADD", "Innerposition = " + adapter.getInnerposition());
+    }
+
+    public int getShopcartnumber() {
+        int[] temp = adapter.getDishcount();
+        for (int i = 0; i < temp.length; i++) shopcartnumber += temp[i];
+        Log.i("ISADD", "finished number" + shopcartnumber);
+        return shopcartnumber;
     }
 }
