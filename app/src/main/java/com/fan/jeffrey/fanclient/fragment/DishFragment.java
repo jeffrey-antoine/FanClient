@@ -1,5 +1,6 @@
 package com.fan.jeffrey.fanclient.fragment;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.fan.jeffrey.fanclient.R;
 import com.fan.jeffrey.fanclient.adapter.DishAdapter;
@@ -26,6 +28,9 @@ public class DishFragment extends Fragment implements AdapterView.OnItemClickLis
     private List<Dishes> DishesList = new ArrayList<>();
     private DishAdapter adapter;
     private int shopcartnumber;
+
+
+    private dishCountInterface dishCountInterface;
     public DishFragment() {
 
     }
@@ -65,13 +70,26 @@ public class DishFragment extends Fragment implements AdapterView.OnItemClickLis
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Dishes dishes = DishesList.get(position);
         adapter.setInnerposition(position);
-        //Log.v("ISADD", "Innerposition = " + adapter.getInnerposition());
     }
 
-    public int getShopcartnumber() {
-        int[] temp = adapter.getDishcount();
-        for (int i = 0; i < temp.length; i++) shopcartnumber += temp[i];
-        Log.i("ISADD", "finished number" + shopcartnumber);
-        return shopcartnumber;
+    //Todo an interface
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        try {
+            dishCountInterface = (dishCountInterface) activity;
+        } catch (Exception e) {
+            throw new ClassCastException(activity.toString() + "must implement OnArticleSelectedListener");
+        }
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+    }
+
+    public interface dishCountInterface {
+        public void onButtonPressed(int number);
     }
 }

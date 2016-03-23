@@ -56,17 +56,14 @@ public class DishesActivity extends Activity implements View.OnClickListener {
             case (R.id.iv_backarrow):
                 finish();
                 break;
-            case (R.id.iv_shopcart):
+            case (R.id.fl_shopcart):
                 Log.i("ISADD", "shopcart need to be done");
-
-                redspot.setVisibility(View.VISIBLE);
-                Log.i("ISADD", "" + dishFragment.getShopcartnumber());
-                redspot.setText("100");
                 break;
             default:
                 break;
         }
     }
+
 
 }
 

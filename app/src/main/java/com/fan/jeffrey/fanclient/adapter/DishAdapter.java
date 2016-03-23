@@ -1,6 +1,7 @@
 package com.fan.jeffrey.fanclient.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fan.jeffrey.fanclient.R;
+import com.fan.jeffrey.fanclient.activity.DishesActivity;
 import com.fan.jeffrey.fanclient.subclass.Dishes;
 
 import org.w3c.dom.Text;
@@ -33,6 +35,8 @@ public class DishAdapter extends BaseAdapter {
     private ViewHolder viewHolder;
     private View view;
     private int innerposition;
+    private DishesActivity dishesActivity = new DishesActivity();
+    //TextView redSpot = (TextView) dishesActivity.findViewById(R.id.tv_redspot);
 
     public DishAdapter(Context context, int textViewResourceId, List<Dishes> objects) {
         dishesArrayList = objects;
@@ -43,7 +47,6 @@ public class DishAdapter extends BaseAdapter {
 
         //for (int i = 0; i < dishcount.length; i++) dishcount[i] = 0;
     }
-
     @Override
     public int getCount() {
         return dishesArrayList.size();
@@ -104,8 +107,8 @@ public class DishAdapter extends BaseAdapter {
         viewHolder.dishcount.setTag(position);
         //Todo change the value of dishcount
 
-        viewHolder.minus.setOnClickListener(new Mylistener(innerposition));
-        viewHolder.plus.setOnClickListener(new Mylistener(innerposition));
+//        viewHolder.minus.setOnClickListener(new Mylistener(innerposition));
+//        viewHolder.plus.setOnClickListener(new Mylistener(innerposition));
         Log.i("ISADD", "first InnerPositon is " + innerposition);
 //        viewHolder.minus.setOnClickListener(new Mylistener(position) {
 //            @Override
@@ -133,10 +136,6 @@ public class DishAdapter extends BaseAdapter {
         return convertView;
     }
 
-    public int[] getDishcount() {
-        return dishcount;
-    }
-
     public final static class ViewHolder {
         public ImageView dishImage;
         public TextView dishname;
@@ -147,7 +146,7 @@ public class DishAdapter extends BaseAdapter {
         public ImageView plus;
     }
 
-    private class Mylistener implements View.OnClickListener {
+    public class Mylistener implements View.OnClickListener {
 
         int mPosition;
 
@@ -167,7 +166,10 @@ public class DishAdapter extends BaseAdapter {
             switch (v.getId()) {
                 case (R.id.iv_minus):
 
-                    if (dishcount[mPosition] > 0) dishcount[mPosition]--;
+                    if (dishcount[mPosition] > 0) {
+                        dishcount[mPosition]--;
+
+                    }
 
 //                    if (dishcount[mPosition] <= 0) viewHolder.minus.setVisibility(View.INVISIBLE);
 
@@ -180,6 +182,7 @@ public class DishAdapter extends BaseAdapter {
                 case (R.id.iv_plus):
 
                     dishcount[mPosition]++;
+
                     //viewHolder.plus.setVisibility(View.VISIBLE);
 //                    if (dishcount[mPosition] > 0) {
 //                        viewHolder.minus.setVisibility(View.VISIBLE);
@@ -193,6 +196,14 @@ public class DishAdapter extends BaseAdapter {
                     break;
 
             }
+//            refreshRedSpot();
         }
     }
+//    public int refreshRedSpot() {
+//        int shopcartnumber = 0;
+//        for (int i = 0; i < dishcount.length; i++) shopcartnumber += dishcount[i];
+//        Log.i("ISADD", "finished number" + shopcartnumber);
+//        redSpot.setText("" + shopcartnumber);
+//        return shopcartnumber;
+//    }
 }
