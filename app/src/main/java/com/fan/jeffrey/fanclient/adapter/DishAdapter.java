@@ -1,26 +1,18 @@
 package com.fan.jeffrey.fanclient.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.fan.jeffrey.fanclient.R;
-import com.fan.jeffrey.fanclient.activity.DishesActivity;
+import com.fan.jeffrey.fanclient.activity.SingleShopActivity;
 import com.fan.jeffrey.fanclient.subclass.Dishes;
 
-import org.w3c.dom.Text;
-
-import java.lang.reflect.Array;
-import java.util.AbstractCollection;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,15 +27,16 @@ public class DishAdapter extends BaseAdapter {
     private ViewHolder viewHolder;
     private View view;
     private int innerposition;
-    private DishesActivity dishesActivity = new DishesActivity();
+    private SingleShopActivity singleShopActivity;
     //TextView redSpot = (TextView) dishesActivity.findViewById(R.id.tv_redspot);
 
-    public DishAdapter(Context context, int textViewResourceId, List<Dishes> objects) {
+    public DishAdapter(Context context, int textViewResourceId, List<Dishes> objects, SingleShopActivity singleShopActivity) {
         dishesArrayList = objects;
         myContext = context;
         myInflater = (LayoutInflater) myContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         resourceId = textViewResourceId;
         dishcount = new int[dishesArrayList.size()];
+        this.singleShopActivity = singleShopActivity;
 
         //for (int i = 0; i < dishcount.length; i++) dishcount[i] = 0;
     }
@@ -107,14 +100,19 @@ public class DishAdapter extends BaseAdapter {
         viewHolder.dishcount.setTag(position);
         //Todo change the value of dishcount
 
-//        viewHolder.minus.setOnClickListener(new Mylistener(innerposition));
-//        viewHolder.plus.setOnClickListener(new Mylistener(innerposition));
+        viewHolder.minus.setOnClickListener(new Mylistener(innerposition));
+        viewHolder.plus.setOnClickListener(new Mylistener(innerposition));
         Log.i("ISADD", "first InnerPositon is " + innerposition);
 //        viewHolder.minus.setOnClickListener(new Mylistener(position) {
 //            @Override
 //            public void onClick(View v) {
 //                if (dishcount[innerposition] > 0) dishcount[innerposition]--;
-//                viewHolder.dishcount.setText(dishcount[innerposition] + "");
+//                if (dishcount[innerposition] == 0) {
+//                    viewHolder.dishcount.setVisibility(View.INVISIBLE);
+//                    viewHolder.minus.setVisibility(View.INVISIBLE);
+//                }
+//                viewHolder.dishcount.setText(dishcount[innerposition] + "")
+//                notifyDataSetChanged();
 //                Log.i("ISADD", "minus something here!" + innerposition);
 //            }
 //
@@ -123,20 +121,22 @@ public class DishAdapter extends BaseAdapter {
 //            @Override
 //            public void onClick(View v) {
 //                dishcount[innerposition]++;
-//
+//                viewHolder.minus.setVisibility(View.VISIBLE);
+//                viewHolder.dishcount.setVisibility(View.VISIBLE);
 //                viewHolder.dishcount.setText(dishcount[innerposition] + "");
-//                if (dishcount[innerposition] > 0) {
-//                    viewHolder.minus.setVisibility(View.VISIBLE);
-//                    //Todo Something with the shopcart;
-//                }
-//                Log.i("ISADD", "add something here!" + innerposition);
 //            }
 //        });
 //        this.notifyDataSetChanged();
         return convertView;
     }
 
-    public final static class ViewHolder {
+    public int getShopCartNumber() {
+        int shopcartnumber = 0;
+        for (int i = 0; i < dishcount.length; i++) shopcartnumber += dishcount[i];
+        return shopcartnumber;
+    }
+
+    private final static class ViewHolder {
         public ImageView dishImage;
         public TextView dishname;
         public TextView dishcomment;
@@ -154,28 +154,23 @@ public class DishAdapter extends BaseAdapter {
             this.mPosition = mPosition;
             Log.i("ISADD", "This is the first position" + mPosition);
         }
-
         @Override
         public void onClick(View v) {
-
-            //Log.i("ISADD", "Click on board!" + v.getId());
-            //Log.i("ISADD", "Click on board!" + R.id.iv_minus);
-            //Log.i("ISADD", "Click on board!" + R.id.iv_plus);
-            Log.i("ISADD", "Click on board!" + mPosition);
-
+            TextView redspot = (TextView) singleShopActivity.findViewById(R.id.tv_redspot);
             switch (v.getId()) {
                 case (R.id.iv_minus):
 
                     if (dishcount[mPosition] > 0) {
                         dishcount[mPosition]--;
-
                     }
 
-//                    if (dishcount[mPosition] <= 0) viewHolder.minus.setVisibility(View.INVISIBLE);
+                    //if (dishcount[mPosition] <= 0) viewHolder.minus.setVisibility(View.INVISIBLE);
 
                     viewHolder.dishcount.setText("" + dishcount[mPosition]);
                     //ViewHolder viewHolder1 = getTag(mPosition);
                     Log.i("ISADD", "Minus on board! Dishcount =  " + dishcount[mPosition]);
+
+
                     notifyDataSetChanged();
 
                     break;
@@ -189,21 +184,22 @@ public class DishAdapter extends BaseAdapter {
 //                    }
                     viewHolder.dishcount.setText("" + dishcount[mPosition]);
                     Log.i("ISADD", "Plus on board! Dishcount =  " + dishcount[mPosition]);
-                    //view.refreshDrawableState();
+
                     notifyDataSetChanged();
                     break;
                 default:
                     break;
-
             }
-//            refreshRedSpot();
+
+            if (getShopCartNumber() > 0) {
+                redspot.setVisibility(View.VISIBLE);
+                redspot.setText("" + getShopCartNumber());
+            } else {
+                redspot.setVisibility(View.INVISIBLE);
+            }
+
         }
     }
-//    public int refreshRedSpot() {
-//        int shopcartnumber = 0;
-//        for (int i = 0; i < dishcount.length; i++) shopcartnumber += dishcount[i];
-//        Log.i("ISADD", "finished number" + shopcartnumber);
-//        redSpot.setText("" + shopcartnumber);
-//        return shopcartnumber;
-//    }
+
+
 }

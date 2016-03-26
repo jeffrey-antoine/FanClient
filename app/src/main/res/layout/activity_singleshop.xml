@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/titlebar"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_backarrow"
+            android:layout_width="0dp"
+            android:layout_height="26dp"
+            android:layout_gravity="center_vertical|right"
+            android:layout_weight="3"
+            android:src="@drawable/backarrow" />
+
+        <TextView
+            android:id="@+id/tv_titletext"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_weight="10"
+            android:gravity="center_vertical|center_horizontal"
+            android:textColor="#ffffff"
+            android:textSize="25dp" />
+
+        <FrameLayout
+            android:id="@+id/fl_shopcart"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_weight="2">
+
+            <ImageView
+                android:id="@+id/iv_shopcart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical|right"
+                android:layout_weight="3"
+                android:src="@drawable/shopcart1"></ImageView>
+
+            <TextView
+                android:id="@+id/tv_redspot"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="right|top"
+                android:background="@drawable/redspot"
+                android:gravity="center_horizontal|center_vertical"
+                android:inputType="number"
+                android:text="1"
+                android:textColor="#ffffff"
+                android:visibility="invisible" />
+
+        </FrameLayout>
+
+
+    </LinearLayout>
+
+    <!-- single shop part -->
+    <RelativeLayout
+        android:id="@+id/rl_singleshop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <ImageView
+
+            android:id="@+id/iv_single_shopimage"
+            android:layout_width="160dp"
+            android:layout_height="140dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp" />
+
+        <TextView
+            android:id="@+id/tv_single_shopname"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_alignTop="@+id/iv_single_shopimage"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_marginLeft="39dp"
+            android:layout_marginStart="39dp"
+            android:layout_toEndOf="@+id/iv_single_shopimage"
+            android:layout_toRightOf="@+id/iv_single_shopimage" />
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_alignBottom="@+id/iv_single_shopimage"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_toEndOf="@+id/iv_single_shopimage"
+            android:layout_toRightOf="@+id/iv_single_shopimage"
+            android:numStars="5"
+            android:stepSize="1" />
+        <!--style="?android:attr/ratingBarStyleSmall"-->
+    </RelativeLayout>
+
+    <!--listpart-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/lv_dishlist"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusableInTouchMode="false">
+
+        </ListView>
+    </LinearLayout>
+
+
+</LinearLayout>

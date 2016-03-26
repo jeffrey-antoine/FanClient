@@ -24,12 +24,9 @@
             android:name=".activity.MainActivity"
             android:label="MainActivity" />
         <activity
-            android:name=".activity.DishesActivity"
-            android:label="@string/title_activity_dishes"
-            android:theme="@style/AppTheme" />
-        <activity
             android:name=".activity.LoginActivity"
             android:label="@string/title_activity_login"></activity>
+        <activity android:name=".activity.SingleShopActivity"></activity>
     </application>
 
 </manifest>

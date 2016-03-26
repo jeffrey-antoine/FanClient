@@ -14,9 +14,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.fan.jeffrey.fanclient.R;
+import com.fan.jeffrey.fanclient.activity.SingleShopActivity;
 import com.fan.jeffrey.fanclient.subclass.Shop;
 import com.fan.jeffrey.fanclient.adapter.ShopAdapter;
-import com.fan.jeffrey.fanclient.activity.DishesActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +32,7 @@ public class ShopListFragment extends Fragment implements AdapterView.OnItemClic
     }
 
     public static void actionStart(Context context, String shopName, int shopImageId, String[] dishes, float[] dishPrices, String[] dishComments) {
-        Intent intent = new Intent(context, DishesActivity.class);
+        Intent intent = new Intent(context, SingleShopActivity.class);
         intent.putExtra("shop_Name", shopName);
         intent.putExtra("shop_ImageId", shopImageId);
         intent.putExtra("dishes", dishes);
