@@ -15,8 +15,8 @@ import android.widget.ListView;
 
 import com.fan.jeffrey.fanclient.R;
 import com.fan.jeffrey.fanclient.activity.SingleShopActivity;
-import com.fan.jeffrey.fanclient.subclass.Shop;
 import com.fan.jeffrey.fanclient.adapter.ShopAdapter;
+import com.fan.jeffrey.fanclient.subclass.Shop;
 
 import java.util.ArrayList;
 import java.util.List;

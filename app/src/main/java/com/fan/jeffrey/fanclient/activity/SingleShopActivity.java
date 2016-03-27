@@ -2,9 +2,7 @@ package com.fan.jeffrey.fanclient.activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -13,6 +11,7 @@ import android.widget.TextView;
 
 import com.fan.jeffrey.fanclient.R;
 import com.fan.jeffrey.fanclient.adapter.DishAdapter;
+import com.fan.jeffrey.fanclient.db.MyDatabaseHelper;
 import com.fan.jeffrey.fanclient.subclass.Dishes;
 
 import java.util.ArrayList;
@@ -26,7 +25,9 @@ public class SingleShopActivity extends Activity {
     private ViewHolder viewHolder = new ViewHolder();
     private DishAdapter adapter;
     private List<Dishes> DishesList = new ArrayList<>();
+    //database for the shopcart
 
+    private MyDatabaseHelper dbHelper;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,11 +35,16 @@ public class SingleShopActivity extends Activity {
         Intent intent = this.getIntent();
         iniView();
         iniText(intent);
+
         adapter = new DishAdapter(this, R.layout.dishitem, DishesList, this);
         viewHolder.dishlistview.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
+        dbHelper = new MyDatabaseHelper(this, "ShopCart.db", null, 1);
+
         iniClick();
+
+
     }
 
     public void iniView() {
@@ -77,10 +83,19 @@ public class SingleShopActivity extends Activity {
         viewHolder.shopcart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                dbHelper.getWritableDatabase();
             }
         });
     }
+
+//    @Override
+//    public void onBackPressed() {
+//        super.onBackPressed();
+//        Intent backIntent = new Intent(this,MainActivity.class);
+//        backIntent.putExtra("ShopCartNumber",adapter.getShopCartNumber());
+//        setResult(RESULT_OK,backIntent);
+//        finish();
+//    }
 
     private final static class ViewHolder {
         ImageView backarrow;
@@ -92,7 +107,7 @@ public class SingleShopActivity extends Activity {
         ImageView shopcart;
 
         public ViewHolder() {
-
         }
     }
+
 }

@@ -1,19 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="80dp">
-    <ImageView
-        android:id="@+id/shopImage"
-        android:layout_width="160dp"
-        android:layout_height="70dp"
-        android:layout_gravity="center_vertical"/>
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:orientation="horizontal">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/shopImage"
+            android:layout_width="160dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center_vertical" />
+
+        <TextView
+            android:id="@+id/tv_redspotmain"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="right|top"
+            android:background="@drawable/redspot"
+            android:gravity="center_horizontal|center_vertical"
+            android:inputType="number"
+            android:text="1"
+            android:textColor="#ffffff"
+            android:visibility="invisible" />
+    </FrameLayout>
+
     <TextView
         android:id="@+id/shopName"
         android:layout_width="wrap_content"
-        android:layout_gravity="center_horizontal|center_vertical"
-        android:gravity="center_vertical|center_horizontal"
         android:layout_height="70dp"
+        android:layout_gravity="center_horizontal|center_vertical"
         android:layout_weight="1"
+        android:gravity="center_vertical|center_horizontal"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"/>
 

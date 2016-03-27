@@ -97,12 +97,13 @@ public class DishAdapter extends BaseAdapter {
         viewHolder.dishcount.setText("" + dishcount[position]);
         //viewHolder.minus.setTag(position);
         //viewHolder.plus.setTag(position);
-        viewHolder.dishcount.setTag(position);
+        //viewHolder.dishcount.setTag(position);
         //Todo change the value of dishcount
 
         viewHolder.minus.setOnClickListener(new Mylistener(innerposition));
         viewHolder.plus.setOnClickListener(new Mylistener(innerposition));
         Log.i("ISADD", "first InnerPositon is " + innerposition);
+        //这个地方没有很好的解决，但是暂时能用了。
 //        viewHolder.minus.setOnClickListener(new Mylistener(position) {
 //            @Override
 //            public void onClick(View v) {
@@ -111,7 +112,7 @@ public class DishAdapter extends BaseAdapter {
 //                    viewHolder.dishcount.setVisibility(View.INVISIBLE);
 //                    viewHolder.minus.setVisibility(View.INVISIBLE);
 //                }
-//                viewHolder.dishcount.setText(dishcount[innerposition] + "")
+//                viewHolder.dishcount.setText(dishcount[innerposition] + "");
 //                notifyDataSetChanged();
 //                Log.i("ISADD", "minus something here!" + innerposition);
 //            }
@@ -164,13 +165,6 @@ public class DishAdapter extends BaseAdapter {
                         dishcount[mPosition]--;
                     }
 
-                    //if (dishcount[mPosition] <= 0) viewHolder.minus.setVisibility(View.INVISIBLE);
-
-                    viewHolder.dishcount.setText("" + dishcount[mPosition]);
-                    //ViewHolder viewHolder1 = getTag(mPosition);
-                    Log.i("ISADD", "Minus on board! Dishcount =  " + dishcount[mPosition]);
-
-
                     notifyDataSetChanged();
 
                     break;
@@ -178,10 +172,6 @@ public class DishAdapter extends BaseAdapter {
 
                     dishcount[mPosition]++;
 
-                    //viewHolder.plus.setVisibility(View.VISIBLE);
-//                    if (dishcount[mPosition] > 0) {
-//                        viewHolder.minus.setVisibility(View.VISIBLE);
-//                    }
                     viewHolder.dishcount.setText("" + dishcount[mPosition]);
                     Log.i("ISADD", "Plus on board! Dishcount =  " + dishcount[mPosition]);
 
