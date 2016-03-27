@@ -43,6 +43,7 @@ public class SingleShopActivity extends Activity {
         dbHelper = new MyDatabaseHelper(this, "ShopCart.db", null, 1);
 
         iniClick();
+        // backIntent must be put here.
 
 
     }
@@ -83,19 +84,21 @@ public class SingleShopActivity extends Activity {
         viewHolder.shopcart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //这里是读数据库
                 dbHelper.getWritableDatabase();
             }
         });
     }
 
-//    @Override
-//    public void onBackPressed() {
-//        super.onBackPressed();
-//        Intent backIntent = new Intent(this,MainActivity.class);
-//        backIntent.putExtra("ShopCartNumber",adapter.getShopCartNumber());
-//        setResult(RESULT_OK,backIntent);
-//        finish();
-//    }
+    @Override
+    public void onBackPressed() {
+        Intent backIntent = new Intent(this, MainActivity.class);
+        backIntent.putExtra("ShopCartNumber", adapter.getShopCartNumber());
+        Log.i("ISADD", "shopcartnumber = " + adapter.getShopCartNumber());
+        Log.i("ISADD", "" + backIntent);
+        setResult(RESULT_OK, backIntent);
+        finish();
+    }
 
     private final static class ViewHolder {
         ImageView backarrow;

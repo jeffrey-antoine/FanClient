@@ -20,6 +20,7 @@
             android:layout_height="20dp"
             android:layout_gravity="right|top"
             android:background="@drawable/redspot"
+            android:focusable="false"
             android:gravity="center_horizontal|center_vertical"
             android:inputType="number"
             android:text="1"

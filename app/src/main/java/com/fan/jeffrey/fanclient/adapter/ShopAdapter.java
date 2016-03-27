@@ -20,10 +20,18 @@ import java.util.List;
 public class ShopAdapter extends ArrayAdapter<Shop> {
 
     private int resourceId;
-
+    private int[] discount;
+    private List<Shop> shopList;
     public ShopAdapter(Context context, int textViewResourceId, List<Shop> objects){
         super(context,textViewResourceId,objects);
         resourceId = textViewResourceId;
+        shopList = objects;
+        discount = new int[shopList.size()];
+        for (int i = 0; i < discount.length; i++) discount[i] = 0;
+    }
+
+    public void setDiscount(int[] discount) {
+        this.discount = discount;
     }
 
     @Override
@@ -33,8 +41,13 @@ public class ShopAdapter extends ArrayAdapter<Shop> {
         View view = LayoutInflater.from(getContext()).inflate(resourceId, null);
         ImageView shopImage = (ImageView) view.findViewById(R.id.shopImage);
         TextView shopName = (TextView) view.findViewById(R.id.shopName);
+        TextView redspot = (TextView) view.findViewById(R.id.tv_redspotmain);
+        redspot.setText("" + discount[position]);
+        redspot.setVisibility(View.INVISIBLE);
+        if (discount[position] > 0) redspot.setVisibility(View.VISIBLE);
         shopImage.setImageResource(shop.getShopImageId());
         shopName.setText(shop.getShopName());
+
         return view;
     }
 }

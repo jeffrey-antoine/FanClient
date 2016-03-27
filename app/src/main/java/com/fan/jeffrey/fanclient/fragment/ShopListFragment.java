@@ -26,7 +26,8 @@ public class ShopListFragment extends Fragment implements AdapterView.OnItemClic
     ListView shoplistview;
     private List<Shop> ShopList = new ArrayList<>();
     private ShopAdapter adapter;
-
+    private int[] discount;
+    private int position;
     public ShopListFragment() {
         // Required empty public constructor
     }
@@ -42,6 +43,8 @@ public class ShopListFragment extends Fragment implements AdapterView.OnItemClic
         Log.i("ISADD", intent.getStringExtra("shop_Name"));
     }
 
+    //
+//
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -60,6 +63,7 @@ public class ShopListFragment extends Fragment implements AdapterView.OnItemClic
 
     // pay attention to the size of pic
     private void initShop() {
+
         String[] aa = {"滷肉飯", "和風排骨飯", "椒麻雞飯", "雞腿飯", "親子丼", "自助餐", "麥當勞", "KFC", "蒜泥白肉飯", "招牌面"};
         String[] bb = {"自助餐", "麥當勞", "KFC", "蒜泥白肉飯", "招牌面", "滷肉飯", "和風排骨飯", "椒麻雞飯", "雞腿飯", "親子丼"};
         float[] price = {17.85f, 29.85f, 19.85f, 18.85f, 17.85f, 17.85f, 30.85f, 17.85f, 17.85f, 17.85f};
@@ -90,6 +94,8 @@ public class ShopListFragment extends Fragment implements AdapterView.OnItemClic
         ShopList.add(clouddisaterproof1);
         Shop rotating1 = new Shop("转吧", R.drawable.ejpg111, bb, price, bb);
         ShopList.add(rotating1);
+        discount = new int[ShopList.size()];
+        for (int i = 0; i < discount.length; i++) discount[i] = 0;
     }
 
     @Override
@@ -100,7 +106,42 @@ public class ShopListFragment extends Fragment implements AdapterView.OnItemClic
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Shop shop = ShopList.get(position);
-        actionStart(getActivity(), shop.getShopName(), shop.getShopImageId(), shop.getShopdishes(), shop.getDishprices(), shop.getDishcomments());
+        this.position = position;
+        //actionStart(getActivity(), shop.getShopName(), shop.getShopImageId(), shop.getShopdishes(), shop.getDishprices(), shop.getDishcomments());
         Log.v("ISADD", "Shoplist position = " + position);
+        Intent intent = new Intent(getActivity(), SingleShopActivity.class);
+        intent.putExtra("shop_Name", shop.getShopName());
+        intent.putExtra("shop_ImageId", shop.getShopImageId());
+        intent.putExtra("dishes", shop.getShopdishes());
+        intent.putExtra("dish_Prices", shop.getDishprices());
+        intent.putExtra("dish_Comments", shop.getDishcomments());
+        //startActivityForResult(intent, 2);
+        getActivity().startActivityForResult(intent, 2);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.i("ISADD", "I am here!! SUCCESS");
+        Log.i("ISADD", "request Code" + requestCode);
+        Log.i("ISADD", "RESULT CODE = " + resultCode);
+        switch (resultCode) {
+            case -1:
+                Log.i("ISADD", "temp position = " + position);
+                Log.i("ISADD", "intent data = " + data.getExtras().getInt("ShopCartNumber"));
+                discount[position] = data.getExtras().getInt("ShopCartNumber");
+                adapter.setDiscount(discount);
+                adapter.notifyDataSetChanged();
+                break;
+//            case 1:
+//                int backvalue = data.getIntExtra("ShopCartNumber", 0);
+//                Log.i("ISADD", "backvalue = " + backvalue);
+//                if (backvalue > 0) {
+//                    discount[position] = backvalue;
+//                    adapter.setDiscount(discount);
+//                }
+//                adapter.notifyDataSetChanged();
+//                break;
+        }
     }
 }

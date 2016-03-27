@@ -3,6 +3,7 @@ package com.fan.jeffrey.fanclient.activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -12,10 +13,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.fan.jeffrey.fanclient.R;
 import com.fan.jeffrey.fanclient.fragment.MeFragment;
 import com.fan.jeffrey.fanclient.fragment.NewOrderFragment;
 import com.fan.jeffrey.fanclient.fragment.OldOrderFragment;
-import com.fan.jeffrey.fanclient.R;
 import com.fan.jeffrey.fanclient.fragment.ShopListFragment;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -151,5 +152,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (meFragment != null)
             transaction.hide(meFragment);
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.i("ISADD", "Main Activity ReslutCode = " + resultCode);
+        Fragment fragment = getFragmentManager().findFragmentByTag(ShopListFragmentTag);
+        fragment.onActivityResult(requestCode, resultCode, data);
     }
 }
