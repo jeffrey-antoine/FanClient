@@ -102,7 +102,7 @@ public class SingleShopActivity extends Activity {
 
         if (adapter.getShopCartNumber() > 0) {
             Log.i("SingleShopActivity", "I am here!");
-
+            //不知道为什么新建线程就会有问题。
             String shopName = (String) ((TextView) findViewById(R.id.tv_titletext)).getText();
             Log.i("SingleShopActivity", "shopName = " + shopName);
             MyDatabaseHelper dbHelper = new MyDatabaseHelper(this, "ShopCart.db", null, intent.getExtras().getInt("shop_Cart_Version"), shopName); //new table created!

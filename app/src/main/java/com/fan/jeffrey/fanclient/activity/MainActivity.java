@@ -103,6 +103,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();
                 exitTime = System.currentTimeMillis();
             } else {
+                this.deleteDatabase("ShopCart.db");
                 finish();
                 System.exit(0);
             }
@@ -141,6 +142,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         transaction.show(to).commit();
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        this.deleteDatabase("ShopCart.db");
+        super.onDestroy();
     }
 
     public void hideFragment(FragmentTransaction transaction) {
