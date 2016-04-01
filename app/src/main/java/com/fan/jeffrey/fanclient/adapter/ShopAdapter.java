@@ -34,6 +34,7 @@ public class ShopAdapter extends ArrayAdapter<Shop> {
         this.discount = discount;
     }
 
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Shop shop = getItem(position);

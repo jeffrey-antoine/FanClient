@@ -28,6 +28,7 @@ public class ShopListFragment extends Fragment implements AdapterView.OnItemClic
     private ShopAdapter adapter;
     private int[] discount;
     private int position;
+    private int shopCartVersion = 1;
     public ShopListFragment() {
         // Required empty public constructor
     }
@@ -69,12 +70,12 @@ public class ShopListFragment extends Fragment implements AdapterView.OnItemClic
         float[] price = {17.85f, 29.85f, 19.85f, 18.85f, 17.85f, 17.85f, 30.85f, 17.85f, 17.85f, 17.85f};
 
 //        R.drawable.ejpg111 is a int!!
-        Shop ejpg = new Shop("e到校", R.drawable.ejpg111, aa, price, aa);
+        Shop ejpg = new Shop("eschool", R.drawable.ejpg111, aa, price, aa);
         Log.i("ISADD", "shopImageid = " + ejpg.getShopImageId());
         ShopList.add(ejpg);
         Shop kast = new Shop("KAST", R.drawable.ejpg111, aa, price, aa);
         ShopList.add(kast);
-        Shop lovehomediary = new Shop("爱家日记", R.drawable.ejpg111, aa, price, aa);
+        Shop lovehomediary = new Shop("lovehome", R.drawable.ejpg111, aa, price, aa);
         ShopList.add(lovehomediary);
         Shop wisdomsave = new Shop("慧理财", R.drawable.ejpg111, aa, price, aa);
         ShopList.add(wisdomsave);
@@ -107,6 +108,7 @@ public class ShopListFragment extends Fragment implements AdapterView.OnItemClic
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Shop shop = ShopList.get(position);
         this.position = position;
+        this.shopCartVersion++;
         //actionStart(getActivity(), shop.getShopName(), shop.getShopImageId(), shop.getShopdishes(), shop.getDishprices(), shop.getDishcomments());
         Log.v("ISADD", "Shoplist position = " + position);
         Intent intent = new Intent(getActivity(), SingleShopActivity.class);
@@ -115,6 +117,7 @@ public class ShopListFragment extends Fragment implements AdapterView.OnItemClic
         intent.putExtra("dishes", shop.getShopdishes());
         intent.putExtra("dish_Prices", shop.getDishprices());
         intent.putExtra("dish_Comments", shop.getDishcomments());
+        intent.putExtra("shop_Cart_Version", this.shopCartVersion);
         //startActivityForResult(intent, 2);
         getActivity().startActivityForResult(intent, 2);
     }

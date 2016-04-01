@@ -10,29 +10,54 @@ import android.widget.Toast;
  * Created by piaox on 2016/3/26.
  */
 public class MyDatabaseHelper extends SQLiteOpenHelper {
-    public static final String CREATE_ShopCart = "create table shopcart ("
-            + "id integer primary key autoincrement, "
-            + "shopname text, "
-            + "dishname text, "
-            + "price real, "
-            + "number integer)";
-    private Context mContext;
 
-    public MyDatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
+
+    private Context mContext;
+    private String shopName;
+
+    public MyDatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version, String shopname) {
         super(context, name, factory, version);
         mContext = context;
-
+        shopName = shopname;
     }
+
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+
+        final String CREATE_ShopCart = "create table "
+                + shopName
+                + " ("
+                + "id integer primary key autoincrement, "
+                + "shopname text, "
+                + "shopid integer, "
+                + "dishname text, "
+                + "dishid integer, "
+                + "price real, "
+                + "number integer)";
+        db.execSQL("drop table if exists " + shopName);
+        Log.i("MyDatabaseHelper", "" + CREATE_ShopCart);
         db.execSQL(CREATE_ShopCart);
-        Log.i("ISADD", "Created successful!");
-        Toast.makeText(mContext, "Create succceeded", Toast.LENGTH_SHORT).show();
+        Log.i("ISADD", "Create " + shopName + " succceeded!");
+        Toast.makeText(mContext, "Create " + shopName + " succceeded!", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        final String CREATE_ShopCart = "create table "
+                + shopName
+                + " ("
+                + "id integer primary key autoincrement, "
+                + "shopname text, "
+                + "shopid integer, "
+                + "dishname text, "
+                + "dishid integer, "
+                + "price real, "
+                + "number integer)";
+        db.execSQL("drop table if exists " + shopName);
+        Log.i("MyDatabaseHelper", "" + CREATE_ShopCart);
+        db.execSQL(CREATE_ShopCart);
+        Log.i("ISADD", "Create " + shopName + " succceeded!");
+        Toast.makeText(mContext, "Create " + shopName + " succceeded!", Toast.LENGTH_SHORT).show();
     }
 }

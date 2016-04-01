@@ -54,16 +54,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         LinearLayout oldorder = (LinearLayout) findViewById(R.id.ll_oldorder);
         LinearLayout me = (LinearLayout) findViewById(R.id.ll_me);
 
-
-
         shoplist.setOnClickListener(this);
         neworder.setOnClickListener(this);
         oldorder.setOnClickListener(this);
         me.setOnClickListener(this);
 
-
         addFragment(shopListFragment, ShopListFragmentTag);
         tv_shoplist.setTextColor(0xff1B940A);
+        this.deleteDatabase("ShopCart.db");
+//        final Intent bindIntent = new Intent(this, MyService.class);
+//        startService(bindIntent);
     }
     @Override
     public void onClick(View v) {
@@ -90,7 +90,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             default:
                 break;
-
         }
         //transaction.addToBackStack(null);
     }
@@ -99,6 +98,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+
             if ((System.currentTimeMillis() - exitTime) > 2000) {
                 Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();
                 exitTime = System.currentTimeMillis();
@@ -110,6 +110,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         return super.onKeyDown(keyCode, event);
     }
+
 
     //subfunction
     public void initView() {

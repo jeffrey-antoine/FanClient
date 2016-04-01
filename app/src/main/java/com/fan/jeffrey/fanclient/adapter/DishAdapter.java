@@ -1,5 +1,6 @@
 package com.fan.jeffrey.fanclient.adapter;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,6 +29,7 @@ public class DishAdapter extends BaseAdapter {
     private View view;
     private int innerposition;
     private SingleShopActivity singleShopActivity;
+    private ContentValues shopcartValues = new ContentValues();
     //TextView redSpot = (TextView) dishesActivity.findViewById(R.id.tv_redspot);
 
     public DishAdapter(Context context, int textViewResourceId, List<Dishes> objects, SingleShopActivity singleShopActivity) {
@@ -137,6 +139,10 @@ public class DishAdapter extends BaseAdapter {
         return shopcartnumber;
     }
 
+    public int[] getDishcount() {
+        return dishcount;
+    }
+
     private final static class ViewHolder {
         public ImageView dishImage;
         public TextView dishname;
@@ -160,7 +166,6 @@ public class DishAdapter extends BaseAdapter {
             TextView redspot = (TextView) singleShopActivity.findViewById(R.id.tv_redspot);
             switch (v.getId()) {
                 case (R.id.iv_minus):
-
                     if (dishcount[mPosition] > 0) {
                         dishcount[mPosition]--;
                     }
@@ -173,7 +178,6 @@ public class DishAdapter extends BaseAdapter {
                     dishcount[mPosition]++;
 
                     viewHolder.dishcount.setText("" + dishcount[mPosition]);
-                    Log.i("ISADD", "Plus on board! Dishcount =  " + dishcount[mPosition]);
 
                     notifyDataSetChanged();
                     break;
@@ -190,6 +194,4 @@ public class DishAdapter extends BaseAdapter {
 
         }
     }
-
-
 }
