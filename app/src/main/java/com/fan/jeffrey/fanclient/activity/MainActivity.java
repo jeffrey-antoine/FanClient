@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         addFragment(shopListFragment, ShopListFragmentTag);
         tv_shoplist.setTextColor(0xff1B940A);
         this.deleteDatabase("ShopCart.db");
+        this.deleteDatabase("ShopVisited.db");
 //        final Intent bindIntent = new Intent(this, MyService.class);
 //        startService(bindIntent);
     }

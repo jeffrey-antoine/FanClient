@@ -28,7 +28,8 @@ public class ShopListFragment extends Fragment implements AdapterView.OnItemClic
     private ShopAdapter adapter;
     private int[] discount;
     private int position;
-    private int shopCartVersion = 1;
+    private int shopCartVersion = 0;
+    private List<String> visited;
     public ShopListFragment() {
         // Required empty public constructor
     }
@@ -109,6 +110,7 @@ public class ShopListFragment extends Fragment implements AdapterView.OnItemClic
         Shop shop = ShopList.get(position);
         this.position = position;
         this.shopCartVersion++;
+
         //actionStart(getActivity(), shop.getShopName(), shop.getShopImageId(), shop.getShopdishes(), shop.getDishprices(), shop.getDishcomments());
         Log.v("ISADD", "Shoplist position = " + position);
         Intent intent = new Intent(getActivity(), SingleShopActivity.class);
@@ -133,6 +135,8 @@ public class ShopListFragment extends Fragment implements AdapterView.OnItemClic
                 Log.i("ISADD", "temp position = " + position);
                 Log.i("ISADD", "intent data = " + data.getExtras().getInt("ShopCartNumber"));
                 discount[position] = data.getExtras().getInt("ShopCartNumber");
+//                Shop shop =ShopList.get(position);
+//                if(discount[position]> 0 ) shop.setIsVisited(true);
                 adapter.setDiscount(discount);
                 adapter.notifyDataSetChanged();
                 break;

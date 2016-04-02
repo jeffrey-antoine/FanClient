@@ -9,6 +9,7 @@ public class Shop {
     private String[] shopdishes;
     private float[] dishprices;
     private String[] dishcomments;
+    private boolean isVisited = false;
 
     public Shop(String shopName, int shopImageId, String[] shopdishes, float[] dishprices, String[] dishcomments) {
         this.shopImageId = shopImageId;
@@ -34,5 +35,9 @@ public class Shop {
 
     public String[] getDishcomments() {
         return dishcomments;
+    }
+
+    public void setIsVisited(boolean isVisited) {
+        this.isVisited = isVisited;
     }
 }

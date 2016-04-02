@@ -1,8 +1,6 @@
 package com.fan.jeffrey.fanclient.adapter;
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,15 +27,15 @@ public class DishAdapter extends BaseAdapter {
     private View view;
     private int innerposition;
     private SingleShopActivity singleShopActivity;
-    private ContentValues shopcartValues = new ContentValues();
+
     //TextView redSpot = (TextView) dishesActivity.findViewById(R.id.tv_redspot);
 
-    public DishAdapter(Context context, int textViewResourceId, List<Dishes> objects, SingleShopActivity singleShopActivity) {
+    public DishAdapter(Context context, int textViewResourceId, List<Dishes> objects, SingleShopActivity singleShopActivity, int[] dishcount) {
         dishesArrayList = objects;
         myContext = context;
         myInflater = (LayoutInflater) myContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         resourceId = textViewResourceId;
-        dishcount = new int[dishesArrayList.size()];
+        this.dishcount = dishcount;
         this.singleShopActivity = singleShopActivity;
 
         //for (int i = 0; i < dishcount.length; i++) dishcount[i] = 0;
@@ -73,7 +71,7 @@ public class DishAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         innerposition = position;
 
-        Log.i("ISADD", "first InnerPositon is " + innerposition);
+        //Log.i("ISADD", "first InnerPositon is " + innerposition);
 
         if (convertView == null) {
             convertView = myInflater.inflate(resourceId, null);
@@ -96,7 +94,13 @@ public class DishAdapter extends BaseAdapter {
         viewHolder.dishprice.setText("￥" + dishesArrayList.get(position).getDishPrice());
         viewHolder.dishname.setText(dishesArrayList.get(position).getDishName());
         viewHolder.dishcomment.setText(dishesArrayList.get(position).getDishcomment());
+
+
+        //find the database
+
         viewHolder.dishcount.setText("" + dishcount[position]);
+
+
         //viewHolder.minus.setTag(position);
         //viewHolder.plus.setTag(position);
         //viewHolder.dishcount.setTag(position);
@@ -104,7 +108,7 @@ public class DishAdapter extends BaseAdapter {
 
         viewHolder.minus.setOnClickListener(new Mylistener(innerposition));
         viewHolder.plus.setOnClickListener(new Mylistener(innerposition));
-        Log.i("ISADD", "first InnerPositon is " + innerposition);
+        //Log.i("ISADD", "first InnerPositon is " + innerposition);
         //这个地方没有很好的解决，但是暂时能用了。
 //        viewHolder.minus.setOnClickListener(new Mylistener(position) {
 //            @Override
@@ -159,7 +163,7 @@ public class DishAdapter extends BaseAdapter {
 
         public Mylistener(int mPosition) {
             this.mPosition = mPosition;
-            Log.i("ISADD", "This is the first position" + mPosition);
+            //Log.i("ISADD", "This is the first position" + mPosition);
         }
         @Override
         public void onClick(View v) {
