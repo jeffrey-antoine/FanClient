@@ -9,7 +9,7 @@ import android.util.Log;
  * Created by piaox on 2016/3/29.
  */
 public class UserInfoDatabaseHelper extends SQLiteOpenHelper {
-    public static final String CREATE_USERINFO = "create table if not exists UserInfo ("
+    public static final String CREATE_USERINFO = "create table UserInfo ("
             + "id integer primary key autoincrement, "
             + "userid integer, "
             + "password text, "
@@ -35,6 +35,6 @@ public class UserInfoDatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("drop table if exists UserInfo");
-        onCreate(db);
+        db.execSQL(CREATE_USERINFO);
     }
 }

@@ -13,7 +13,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MainActivity">
+        <activity android:name=".activity.HomeImageActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.HomeImageActivity"
+            android:name=".activity.MainActivity"
             android:label="MainActivity" />
         <activity android:name=".activity.SingleShopActivity" />
         <activity android:name=".activity.ShopCartActivity" />

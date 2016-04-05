@@ -3,8 +3,11 @@ package com.fan.jeffrey.fanclient.activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -18,24 +21,26 @@ import com.fan.jeffrey.fanclient.fragment.MeFragment;
 import com.fan.jeffrey.fanclient.fragment.NewOrderFragment;
 import com.fan.jeffrey.fanclient.fragment.OldOrderFragment;
 import com.fan.jeffrey.fanclient.fragment.ShopListFragment;
+import com.fan.jeffrey.fanclient.service.MyService;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
 
     //four Tag
     public static final String ShopListFragmentTag = "SLF_TAG";
     public static final String OlderOrderFragmentTag = "OOF_TAG";
     public static final String NewOrderFragmentTag = "NOF_TAG";
     public static final String MeFragmentTag = "MF_TAG";
-
     //four Fragment
     ShopListFragment shopListFragment = new ShopListFragment();
     NewOrderFragment newOrderFragment = new NewOrderFragment();
     OldOrderFragment oldOrderFragment = new OldOrderFragment();
     MeFragment meFragment = new MeFragment();
+    //service binder
+    private MyService.DownloadBinder downloadBinder;
 
     //Fragment[] Fragmentlist = {shopListFragment, newOrderFragment, oldOrderFragment,}
     //four bottom TextView
-
     private TextView tv_shoplist;
     private TextView tv_neworder;
     private TextView tv_oldorder;
@@ -63,6 +68,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tv_shoplist.setTextColor(0xff1B940A);
         this.deleteDatabase("ShopCart.db");
         this.deleteDatabase("ShopVisited.db");
+
+        final ServiceConnection connection = new ServiceConnection() {
+            @Override
+            public void onServiceConnected(ComponentName name, IBinder service) {
+                downloadBinder = (MyService.DownloadBinder) service;
+                downloadBinder.startDownload();
+                downloadBinder.getProgress();
+            }
+
+            @Override
+            public void onServiceDisconnected(ComponentName name) {
+
+            }
+        };
+        final Intent bindIntent = new Intent(this, MyService.class);
+        //startService(bindIntent);
+        //stopService(bindIntent);
+        bindService(bindIntent, connection, BIND_AUTO_CREATE);// 绑定服务
 //        final Intent bindIntent = new Intent(this, MyService.class);
 //        startService(bindIntent);
     }

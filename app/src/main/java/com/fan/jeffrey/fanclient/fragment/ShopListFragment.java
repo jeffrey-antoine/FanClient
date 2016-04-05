@@ -2,7 +2,6 @@ package com.fan.jeffrey.fanclient.fragment;
 
 
 import android.app.Fragment;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -34,19 +33,7 @@ public class ShopListFragment extends Fragment implements AdapterView.OnItemClic
         // Required empty public constructor
     }
 
-    public static void actionStart(Context context, String shopName, int shopImageId, String[] dishes, float[] dishPrices, String[] dishComments) {
-        Intent intent = new Intent(context, SingleShopActivity.class);
-        intent.putExtra("shop_Name", shopName);
-        intent.putExtra("shop_ImageId", shopImageId);
-        intent.putExtra("dishes", dishes);
-        intent.putExtra("dish_Prices", dishPrices);
-        intent.putExtra("dish_Comments", dishComments);
-        context.startActivity(intent);
-//        Log.v("ISADD", intent.getStringExtra("shop_Name"));
-    }
 
-    //
-//
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
