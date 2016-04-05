@@ -26,6 +26,7 @@ public class ShopAdapter extends ArrayAdapter<Shop> {
         super(context,textViewResourceId,objects);
         resourceId = textViewResourceId;
         shopList = objects;
+
         discount = new int[shopList.size()];
         for (int i = 0; i < discount.length; i++) discount[i] = 0;
     }

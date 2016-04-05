@@ -65,7 +65,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 + "number integer)";
         if (change) {
             db.execSQL("drop table if exists " + shopName);
-            Log.i("MyDatabaseHelper", "OnCreate executed!");
+            Log.i("MyDatabaseHelper", "OnUpgrade executed!");
             Log.i("MyDatabaseHelper", "" + CREATE_ShopCart);
             db.execSQL(CREATE_ShopCart);
             Log.i("ISADD", "Create " + shopName + " succceeded!");

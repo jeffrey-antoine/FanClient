@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <LinearLayout
@@ -42,7 +41,8 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical|right"
                 android:layout_weight="3"
-                android:src="@drawable/shopcart1"></ImageView>
+                android:src="@drawable/shopcart1"
+                android:visibility="invisible"></ImageView>
 
             <TextView
                 android:id="@+id/tv_redspot"
@@ -60,66 +60,4 @@
 
 
     </LinearLayout>
-
-    <!-- single shop part -->
-    <LinearLayout
-        android:id="@+id/rl_singleshop"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-
-        <ImageView
-
-            android:id="@+id/iv_single_shopimage"
-            android:layout_width="0dp"
-            android:layout_height="140dp"
-            android:layout_weight="1" />
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="140dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-
-            <TextView
-                android:id="@+id/tv_single_shopname"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="3"
-                android:gravity="center_horizontal|center_vertical"
-                android:text="我就是这么水哦！！"
-                android:textSize="25dp" />
-
-            <TextView
-                android:id="@+id/tv_shop_comment"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="2"
-                android:gravity="center_horizontal"
-                android:text="@string/shopcomment"
-                android:textSize="15dp" />
-
-        </LinearLayout>
-        <!--style="?android:attr/ratingBarStyleSmall"-->
-    </LinearLayout>
-
-    <!--listpart-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="bottom"
-        android:orientation="vertical">
-
-        <ListView
-            android:id="@+id/lv_dishlist"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:focusableInTouchMode="false">
-
-        </ListView>
-    </LinearLayout>
-
-
 </LinearLayout>

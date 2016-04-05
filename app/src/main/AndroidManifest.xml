@@ -23,9 +23,6 @@
         <activity
             android:name=".activity.HomeImageActivity"
             android:label="MainActivity" />
-        <activity
-            android:name=".activity.LoginActivity"
-            android:label="@string/title_activity_login" />
         <activity android:name=".activity.SingleShopActivity" />
         <activity android:name=".activity.ShopCartActivity" />
 

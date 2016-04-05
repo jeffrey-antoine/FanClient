@@ -20,6 +20,7 @@ public class ShopListDatabaseHelper extends SQLiteOpenHelper {
         super(context, name, factory, version);
         mContext = context;
         inversion = version;
+
         //mChange = change;
     }
 
@@ -42,17 +43,6 @@ public class ShopListDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-//        final String CREATE_Visited = "create table ShopVisited ("
-//                + "id integer primary key autoincrement, "
-//                + "shopname text)";
-//        Log.i("ShopListDatabaseHelper","oldversion = "+ oldVersion + "newVersion = " + newVersion);
-//        if (mChange)
-//        {
-//            db.execSQL("drop table if exists ShopVisited");
-//            Log.i("ShopListDatabaseHelper", "" + CREATE_Visited);
-//            db.execSQL(CREATE_Visited);
-//            Log.i("ISADD", "Create ShopVisited succceeded!");}
-//            Toast.makeText(mContext, "Create ShopVisited succceeded! OnUpgrade", Toast.LENGTH_SHORT).show();
     }
 
 }

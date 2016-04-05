@@ -13,14 +13,19 @@
     <string name="title_activity_login">Sign in</string>
 
     <!-- Strings related to login -->
-    <string name="prompt_email">電郵</string>
-    <string name="prompt_password">密碼 (可選)</string>
+    <string name="prompt_tele">電話</string>
+    <string name="prompt_password">密碼</string>
     <string name="action_sign_in">登陸或註冊</string>
     <string name="action_sign_in_short">登陸</string>
     <string name="error_invalid_email">郵箱地址不存在</string>
     <string name="error_invalid_password">密碼過短</string>
     <string name="error_incorrect_password">密碼錯誤</string>
     <string name="error_field_required">必填</string>
-    <string name="permission_rationale">"需要訪問聯絡人"
-    </string>
+    <string name="permission_rationale">"需要訪問聯絡人"</string>
+    <!--SingleShop Activity -->
+    <string name="shopcomment">這是一家很好的店</string>
+
+    <!-- selector-->
+    <drawable name="clr_normal">#7FBD41</drawable>
+    <drawable name="clr_pressed">#489000</drawable>
 </resources>

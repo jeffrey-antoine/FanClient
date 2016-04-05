@@ -24,7 +24,6 @@ public class DishAdapter extends BaseAdapter {
     private Context myContext;
     private LayoutInflater myInflater;
     private ViewHolder viewHolder;
-    private View view;
     private int innerposition;
     private SingleShopActivity singleShopActivity;
 
@@ -147,6 +146,10 @@ public class DishAdapter extends BaseAdapter {
         return dishcount;
     }
 
+    public void setDishcount() {
+        for (int i = 0; i < dishcount.length; i++) dishcount[i] = 0;
+        notifyDataSetChanged();
+    }
     private final static class ViewHolder {
         public ImageView dishImage;
         public TextView dishname;

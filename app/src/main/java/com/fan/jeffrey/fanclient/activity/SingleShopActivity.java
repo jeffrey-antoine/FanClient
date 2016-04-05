@@ -27,11 +27,12 @@ import java.util.List;
  */
 public class SingleShopActivity extends Activity {
 
+    Intent startshopcart;
     //database for the shopcart
-    Intent intent;
-    String[] dishes;
-    float[] dishPrices;
-    String[] dishComments;
+    private Intent intent;
+    private String[] dishes;
+    private float[] dishPrices;
+    private String[] dishComments;
     private ViewHolder viewHolder = new ViewHolder();
     private DishAdapter adapter;
     private List<Dishes> DishesList = new ArrayList<>();
@@ -39,6 +40,8 @@ public class SingleShopActivity extends Activity {
     private ContentValues shopcartValues = new ContentValues();
     private ShopListDatabaseHelper dbHelper;
     private Cursor cursor;
+    private int version;
+
     //private MyDatabaseHelper dbHelper;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -106,17 +109,41 @@ public class SingleShopActivity extends Activity {
         viewHolder.shopcart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                saveDatabase();
+                if (adapter.getShopCartNumber() > 0) {
+                    startshopcart = new Intent(SingleShopActivity.this, ShopCartActivity.class);
+                    startshopcart.putExtra("shop_name", viewHolder.title.getText());
+                    startshopcart.putExtra("version", version);
+                    startActivityForResult(startshopcart, 1);
+                } else {
+                    Toast.makeText(SingleShopActivity.this, "購物車裡面沒有餐品哦~添加一些餐品先~", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.i("SingleShopActivity", "result Code" + resultCode);
+
+        switch (resultCode) {
+            case -1:
+                adapter.setDishcount();
+                adapter.notifyDataSetChanged();
+                viewHolder.redspot.setVisibility(View.INVISIBLE);
+                break;
+            default:
+                break;
+        }
+    }
+
     public void iniDiscount() {
         String shopName = (String) viewHolder.title.getText();
-        int version = intent.getExtras().getInt("shop_Cart_Version");
+        version = intent.getExtras().getInt("shop_Cart_Version");
         // Log.i("DishAdapter", " In the big cycle temp version = " + version);
         dbHelper = new ShopListDatabaseHelper(this, "ShopVisited.db", null, version);
-        Log.i("DishAdapter", " In the big cycle temp version = " + version + "svversion = " + version);
+        //Log.i("DishAdapter", " In the big cycle temp version = " + version + "svversion = " + version);
 
         boolean findshopname = false;
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -150,19 +177,34 @@ public class SingleShopActivity extends Activity {
         }
 
         if (findshopname) {
-            Log.i("SingleShopActivity", "start to read the data.");
+            int dishtotal = 0;
+
             if (cursor.moveToFirst()) {
                 do {
                     int innerposition = cursor.getInt(0);
                     dishcount[innerposition] = cursor.getInt(6);  // change specific number
+                    dishtotal += dishcount[innerposition];
                     Log.i("DishAdapter", "dishcount[" + innerposition + "]" + " = " + cursor.getInt(6));
                 } while (cursor.moveToNext());
             }
             cursor.close();
+            viewHolder.redspot.setText("" + dishtotal);
+            Log.i("SingleShopActivity", "start to read the data. +  dishtotal = " + dishtotal);
+            viewHolder.redspot.setVisibility(View.VISIBLE);
         }
     }
     @Override
     public void onBackPressed() {
+        saveDatabase();
+        Intent backIntent = new Intent(this, MainActivity.class);
+        backIntent.putExtra("ShopCartNumber", adapter.getShopCartNumber());
+        //Log.i("ISADD", "shopcartnumber = " + adapter.getShopCartNumber());
+        //Log.i("ISADD", "" + backIntent);
+        setResult(RESULT_OK, backIntent);
+        finish();
+    }
+
+    public void saveDatabase() {
 
         if (adapter.getShopCartNumber() > 0) {
             //Log.i("SingleShopActivity", "I am here!");
@@ -177,7 +219,24 @@ public class SingleShopActivity extends Activity {
             Log.i("SingleShopActivity", "OnCreate Method will be used instantly");
             SQLiteDatabase db = dbHelper.getWritableDatabase();
             SQLiteDatabase shoplistdb = shopListDatabaseHelper.getWritableDatabase();
+            shoplistdb.delete("ShopVisited", "shopname = ?", new String[]{shopName});//which is necessary
             shoplistdb.execSQL("insert into ShopVisited (shopname) values(?)", new String[]{shopName});
+
+            //删除原数据库，重新创建数据库
+
+            db.execSQL("drop table if exists " + shopName);
+            String CREATE_ShopCart = "create table "
+                    + shopName
+                    + " ("
+                    + "id integer, "
+                    + "shopname text, "
+                    + "shopid integer, "
+                    + "dishname text, "
+                    + "dishid integer, "
+                    + "price real, "
+                    + "number integer)";
+            db.execSQL(CREATE_ShopCart);
+
             ContentValues contentValues = new ContentValues();
             int shopid = 123456;
             int dishid = 123456;
@@ -192,38 +251,33 @@ public class SingleShopActivity extends Activity {
                     contentValues.put("dishid", dishid);
                     contentValues.put("price", dishPrices[i]);
                     contentValues.put("number", dishcount[i]);
+//                    db.execSQL("insert into "+ shopName + " values ("+ i + ", " + shopName + ", " +
+//                    shopid   + ", " + dishes[i]  + ", " +dishid + ", " +dishPrices[i]
+//                            + ", " + dishPrices[i]  +  ", " + dishcount[i] + " )");
                     db.insert(shopName, null, contentValues);
                     contentValues.clear();
-                    Log.i("SingleShopActivity", "Successful add things to shopcart！");
-                    Toast.makeText(SingleShopActivity.this, "Finished", Toast.LENGTH_SHORT).show();
+
+                    //Log.i("SingleShopActivity", "Successful add things to shopcart！");
+                    //Toast.makeText(SingleShopActivity.this, "Finished", Toast.LENGTH_SHORT).show();
                 }
             }
-            // create a shopcart for this shop
-
-        }
-        if (adapter.getShopCartNumber() == 0) {
+        } else if (adapter.getShopCartNumber() == 0) {
             String shopName = (String) ((TextView) findViewById(R.id.tv_titletext)).getText();
-            Log.i("SingleShopActivity", "shopName = " + shopName);
+            //Log.i("SingleShopActivity", "shopName = " + shopName);
             int version = intent.getExtras().getInt("shop_Cart_Version");
 
             MyDatabaseHelper dbHelper = new MyDatabaseHelper(this, "ShopCart.db", null, version, shopName, false);
 
             ShopListDatabaseHelper shopListDatabaseHelper = new ShopListDatabaseHelper(this, "ShopVisited.db", null, version);//here will use onCreate method.
-            Log.i("SingleShopActivity", "OnCreate Method will be used instantly");
+            // Log.i("SingleShopActivity", "OnCreate Method will be used instantly");
             SQLiteDatabase db = dbHelper.getWritableDatabase();
             SQLiteDatabase shoplistdb = shopListDatabaseHelper.getWritableDatabase();
-
+            //从两个数据库当中都删除
             db.execSQL("drop table if exists " + shopName);
             shoplistdb.delete("ShopVisited", "shopname = ?", new String[]{shopName});//which is necessary
-
         }
-        Intent backIntent = new Intent(this, MainActivity.class);
-        backIntent.putExtra("ShopCartNumber", adapter.getShopCartNumber());
-        Log.i("ISADD", "shopcartnumber = " + adapter.getShopCartNumber());
-        Log.i("ISADD", "" + backIntent);
-        setResult(RESULT_OK, backIntent);
-        finish();
     }
+
     private final static class ViewHolder {
         ImageView backarrow;
         TextView redspot;
@@ -232,7 +286,6 @@ public class SingleShopActivity extends Activity {
         TextView shopname;
         ListView dishlistview;
         ImageView shopcart;
-
         public ViewHolder() {
         }
     }

@@ -20,6 +20,7 @@ public class Dishes {
         this.dishImageId = dishImageId;
         this.dishName = dishName;
         this.dishPrice = dishPrice;
+        this.dishcomment = null;
     }
     public int getDishImageId() {
         return dishImageId;

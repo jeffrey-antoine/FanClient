@@ -4,13 +4,12 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-import android.widget.Toast;
 
 /**
  * Created by piaox on 2016/3/29.
  */
 public class UserInfoDatabaseHelper extends SQLiteOpenHelper {
-    public static final String CREATE_USERINFO = "create table UserInfo ("
+    public static final String CREATE_USERINFO = "create table if not exists UserInfo ("
             + "id integer primary key autoincrement, "
             + "userid integer, "
             + "password text, "
@@ -30,7 +29,7 @@ public class UserInfoDatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_USERINFO);
         Log.i("MyService", "Create UserInfo successful!");
-        Toast.makeText(mContext, "Create UserInfo successful", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(mContext, "Create UserInfo successful", Toast.LENGTH_SHORT).show();
     }
 
     @Override

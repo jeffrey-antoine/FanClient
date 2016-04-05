@@ -42,7 +42,7 @@ public class ShopListFragment extends Fragment implements AdapterView.OnItemClic
         intent.putExtra("dish_Prices", dishPrices);
         intent.putExtra("dish_Comments", dishComments);
         context.startActivity(intent);
-        Log.i("ISADD", intent.getStringExtra("shop_Name"));
+//        Log.v("ISADD", intent.getStringExtra("shop_Name"));
     }
 
     //
@@ -112,7 +112,7 @@ public class ShopListFragment extends Fragment implements AdapterView.OnItemClic
         this.shopCartVersion++;
 
         //actionStart(getActivity(), shop.getShopName(), shop.getShopImageId(), shop.getShopdishes(), shop.getDishprices(), shop.getDishcomments());
-        Log.v("ISADD", "Shoplist position = " + position);
+//        Log.v("ISADD", "Shoplist position = " + position);
         Intent intent = new Intent(getActivity(), SingleShopActivity.class);
         intent.putExtra("shop_Name", shop.getShopName());
         intent.putExtra("shop_ImageId", shop.getShopImageId());
@@ -127,13 +127,13 @@ public class ShopListFragment extends Fragment implements AdapterView.OnItemClic
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.i("ISADD", "I am here!! SUCCESS");
+//        Log.i("ISADD", "I am here!! SUCCESS");
         Log.i("ISADD", "request Code" + requestCode);
         Log.i("ISADD", "RESULT CODE = " + resultCode);
         switch (resultCode) {
             case -1:
-                Log.i("ISADD", "temp position = " + position);
-                Log.i("ISADD", "intent data = " + data.getExtras().getInt("ShopCartNumber"));
+                //Log.i("ISADD", "temp position = " + position);
+                //Log.i("ISADD", "intent data = " + data.getExtras().getInt("ShopCartNumber"));
                 discount[position] = data.getExtras().getInt("ShopCartNumber");
 //                Shop shop =ShopList.get(position);
 //                if(discount[position]> 0 ) shop.setIsVisited(true);
